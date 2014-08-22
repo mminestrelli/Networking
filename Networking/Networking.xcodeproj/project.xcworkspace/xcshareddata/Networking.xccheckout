@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>708D813C-0F62-424F-931D-E32E3D6E477A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Networking</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>916DA40F-086C-4036-86A3-FA268F11485D</key>
+		<string>https://github.com/mminestrelli/Networking.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Networking/Networking.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>916DA40F-086C-4036-86A3-FA268F11485D</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mminestrelli/Networking.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>916DA40F-086C-4036-86A3-FA268F11485D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>916DA40F-086C-4036-86A3-FA268F11485D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Networking</string>
+		</dict>
+	</array>
+</dict>
+</plist>
