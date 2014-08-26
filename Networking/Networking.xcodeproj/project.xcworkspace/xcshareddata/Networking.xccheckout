@@ -10,6 +10,8 @@
 	<string>Networking</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>45FEBF21-C481-41D9-99CC-81384BB42852</key>
+		<string>https://github.com/mminestrelli/AlmacenDeProductos.git</string>
 		<key>916DA40F-086C-4036-86A3-FA268F11485D</key>
 		<string>https://github.com/mminestrelli/Networking.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Networking/Networking.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>45FEBF21-C481-41D9-99CC-81384BB42852</key>
+		<string>../../../../AlmacenDeProductos</string>
 		<key>916DA40F-086C-4036-86A3-FA268F11485D</key>
 		<string>../../..</string>
 	</dict>
@@ -28,6 +32,14 @@
 	<string>916DA40F-086C-4036-86A3-FA268F11485D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>45FEBF21-C481-41D9-99CC-81384BB42852</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AlmacenDeProductos</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

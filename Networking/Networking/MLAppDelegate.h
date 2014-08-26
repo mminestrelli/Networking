@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MLSearchViewController.h"
+#import "MLFavouritesViewController.h"
 
 @interface MLAppDelegate : UIResponder <UIApplicationDelegate>
 

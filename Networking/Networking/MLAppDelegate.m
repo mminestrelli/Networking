@@ -13,8 +13,33 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+
+    //Search Navigation
+    MLSearchViewController * searchViewController= [[MLSearchViewController alloc]initWithNibName:nil bundle:nil];
+    MLFavouritesViewController * favouritesViewController = [[MLFavouritesViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController * navigationControllerSearch = [[UINavigationController alloc]initWithRootViewController: searchViewController];
+    UINavigationController * navigationControllerFavourites = [[UINavigationController alloc]initWithRootViewController: favouritesViewController];
+    
+    UITabBarController * tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
+    
+    //Tab bar items
+    UITabBarItem* searchProductTabBarItem=[[UITabBarItem alloc] initWithTitle:@"Buscar"  image:[UIImage imageNamed:@"searchTabBar.png"] tag:0];
+    UITabBarItem* favouritesProductsTabBarItem=[[UITabBarItem alloc] initWithTitle:@"Favoritos"  image:[UIImage imageNamed:@"bookmarksTabBar.png"] tag:1];
+    
+    //Seleccionado en amarillo
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor yellowColor]];
+    // Dark appearence
+    //tabBarController.tabBar.barTintColor = [self colorWith255Red:84 withGreen:84 withBlue:84];
+    tabBarController.tabBar.barTintColor=[UIColor blackColor];
+
+    navigationControllerSearch.tabBarItem=searchProductTabBarItem;
+    navigationControllerFavourites.tabBarItem=favouritesProductsTabBarItem;
+    
+    [tabBarController setViewControllers:@[navigationControllerSearch,navigationControllerFavourites]];
+    
+    self.window.rootViewController= tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }
