@@ -11,8 +11,9 @@
 #import "SearchItem.h"
 #import "MLItemDetailViewController.h"
 #import "MLSearchService.h"
+#import "MLThumbnailService.h"
 #define kProductCellHeight 72
-
+#define kOffsetBlock 15
 @interface MLItemListViewController ()<SearchManagerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *items;
@@ -20,7 +21,8 @@
 @property (nonatomic,copy) NSString* input;
 @property (nonatomic,strong) ProductTableViewCell* lastVisibleCell;
 @property (nonatomic,strong) MLSearchService* searchService;
-
+@property (nonatomic,strong) MLThumbnailService* thumbnailService;
+@property (nonatomic,strong) NSOperationQueue* thumbnailDownloadQueue;
 
 @end
 
@@ -32,7 +34,11 @@
     if (self) {
         self.input=input;
         self.searchService = [[MLSearchService alloc]init];
-        //[input stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        self.thumbnailService=[[MLThumbnailService
+                                alloc]init];
+        self.thumbnailDownloadQueue = [[NSOperationQueue alloc] init];
+        self.thumbnailDownloadQueue.name = @"Download Queue";
+        self.thumbnailDownloadQueue.maxConcurrentOperationCount=kOffsetBlock;
     }
     return self;
 }
@@ -46,12 +52,8 @@
 {
     [super viewDidLoad];
     
-//    self.manager = [[SearchManager alloc] init];
-//    self.manager.communicator = [[SearchCommunicator alloc] init];
-//    self.manager.communicator.delegate = self.manager;
-//    self.manager.delegate = self;
-    
     self.searchService.delegate=self;
+    //thumbnaildelegate
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self setTitle:@"Resultados"];
@@ -88,7 +90,7 @@
 }
 
 -(void)didNotReceiveItems{
-    
+    //should push a noResultsViewController
 }
 
 #pragma mark - Table View
@@ -118,11 +120,28 @@
     NSString* soldQty=[NSString stringWithFormat:@"%d%@",item.sold_quantity,@" vendidos." ];
     [cell.labelPrice setText:[NSString stringWithFormat:@"%@",item.price ]];
     [cell.labelSubtitle setText:soldQty];
-    if([item.thumbnail class]!=[NSNull class]){
-        NSURL *url = [NSURL URLWithString:item.thumbnail];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        cell.imageViewPreview.image= [UIImage imageWithData:data];
+    NSURL *url = [NSURL URLWithString:item.thumbnail];
+    
+    // 
+    if([item.thumbnail isEqualToString:@"" ]){
+        cell.imageViewPreview.image = [UIImage imageNamed:@"noPicI.png"];
     }
+    else{
+        // download the image asynchronously
+    [self.thumbnailService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                // Update UI on the main thread.
+                [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+                    cell.imageViewPreview.image = image;
+                }];
+                
+                // cache the image for use later (when scrolling up)
+            }
+        }];
+    
+    }
+
     return cell;
 }
 

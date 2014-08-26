@@ -10,4 +10,5 @@
 
 @interface MLThumbnailService : NSObject
 
+- (void)downloadImageWithURL:(NSURL *)url usingQueue:(NSOperationQueue*)queue withCompletionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock;
 @end
