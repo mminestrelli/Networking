@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SearchItem.h"
+#import "MLSearchItem.h"
 
 @interface MLItemDetailViewController : UIViewController
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(SearchItem*)item;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(MLSearchItem*)item;
 @end

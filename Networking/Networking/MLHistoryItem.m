@@ -17,4 +17,20 @@
     }
     return self;
 }
+/*Encoding and decoding */
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:self.searchedItem forKey:@"item"];
+    [encoder encodeObject:self.searchDate forKey:@"date"];
+
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.searchedItem = [decoder decodeObjectForKey:@"item"];
+        self.searchDate = [decoder decodeObjectForKey:@"date"];
+
+    }
+    return self;
+}
 @end
+

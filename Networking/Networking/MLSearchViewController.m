@@ -9,6 +9,7 @@
 #import "MLSearchViewController.h"
 #import "MLItemListViewController.h"
 #import "MLHistoryTableViewCell.h"
+#import "MLDaoManager.h"
 
 #define kHistoryCellHeight 36;
 
@@ -33,15 +34,20 @@
     self.tableViewHistory.delegate = self;
     self.tableViewHistory.dataSource = self;
     self.searchBar.delegate=self;
-
+    
     // Particular de la search
     UIImage* logoImage = [UIImage imageNamed:@"mercadolibre.png"];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];
     [self.searchBar setPlaceholder:@"Buscar en Mercadolibre"];
     
+    if ([[MLDaoManager sharedManager] getHistory]!=nil) {
+        self.history=[[MLDaoManager sharedManager] getHistory];
+    }
+    //self.history=[[MLDaoManager sharedManager] getHistory];
+    
     //Mock add
-    [self.history addObject:[[MLHistoryItem alloc]initWithItem:@"ipod" andDate:[NSDate dateWithHoursBeforeNow:48]]];
-    [self.history addObject:[[MLHistoryItem alloc]initWithItem:@"ipad"andDate:[NSDate dateWithHoursBeforeNow:5]]];
+//    [self.history addObject:[[MLHistoryItem alloc]initWithItem:@"ipod" andDate:[NSDate dateWithHoursBeforeNow:48]]];
+//    [self.history addObject:[[MLHistoryItem alloc]initWithItem:@"ipad"andDate:[NSDate dateWithHoursBeforeNow:5]]];
     
     [self setTitle:@"Buscar"];
 }
@@ -108,6 +114,8 @@
     [self dismissKeyboard];
     
     [self.history addObject:[[MLHistoryItem alloc]initWithItem:self.searchBar.text andDate:[NSDate date]]];
+    MLDaoManager * daoManager=[MLDaoManager sharedManager];
+    [daoManager saveHistory:self.history];
     [self.tableViewHistory reloadData];
     
     MLItemListViewController * controller=[[MLItemListViewController alloc]initWithInput:self.searchBar.text];

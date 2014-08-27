@@ -7,7 +7,7 @@
 //
 
 #import "MLSearchService.h"
-#import "ItemBuilder.h"
+#import "MLItemBuilder.h"
 #define kOffsetIncrement 15
 @interface MLSearchService()
 @property (nonatomic) NSInteger currentOffset;
@@ -43,7 +43,7 @@
 - (void)receivedItemsJSON:(NSData *)objectNotation
 {
     NSError *error = nil;
-    NSArray *items = [ItemBuilder itemsFromJSON:objectNotation error:&error];
+    NSArray *items = [MLItemBuilder itemsFromJSON:objectNotation error:&error];
     
     if (error != nil) {
         [self.delegate fetchingItemsFailedWithError:error];

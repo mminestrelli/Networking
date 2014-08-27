@@ -8,13 +8,14 @@
 
 #import "MLItemListViewController.h"
 #import "ProductTableViewCell.h"
-#import "SearchItem.h"
+#import "MLSearchItem.h"
 #import "MLItemDetailViewController.h"
 #import "MLSearchService.h"
 #import "MLThumbnailService.h"
+#import "MLDaoManager.h"
 #define kProductCellHeight 72
 #define kOffsetBlock 15
-@interface MLItemListViewController ()<SearchManagerDelegate>
+@interface MLItemListViewController ()<MLSearchManagerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *items;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -109,39 +110,43 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProductTableViewCell * cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    MLDaoManager * daoManager=[MLDaoManager sharedManager];
     
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
-    SearchItem *item = self.items[indexPath.row];
+    MLSearchItem *item = self.items[indexPath.row];
     [cell.labeltitle setText:item.title];
     NSString* soldQty=[NSString stringWithFormat:@"%d%@",item.sold_quantity,@" vendidos." ];
     [cell.labelPrice setText:[NSString stringWithFormat:@"%@",item.price ]];
     [cell.labelSubtitle setText:soldQty];
     NSURL *url = [NSURL URLWithString:item.thumbnail];
     
-    // 
+    //Product without image
     if([item.thumbnail isEqualToString:@"" ]){
         cell.imageViewPreview.image = [UIImage imageNamed:@"noPicI.png"];
     }
     else{
-        // download the image asynchronously
-    [self.thumbnailService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                // Update UI on the main thread.
-                [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
-                    cell.imageViewPreview.image = image;
-                }];
-                
-                // cache the image for use later (when scrolling up)
-            }
-        }];
-    
+        if([daoManager isImageCachedWithId:item.identifier]){
+            cell.imageViewPreview.image =[daoManager getThumbnailWithId:item.identifier];
+        }else{
+            // download the image asynchronously
+            [self.thumbnailService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    // Update UI on the main thread.
+                    [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+                        cell.imageViewPreview.image = image;
+                    }];
+                    
+                    // cache the image for use later (when scrolling up)
+                    [daoManager saveThumbnail:image withId:item.identifier];
+                }
+            }];
+        }
     }
-
     return cell;
 }
 
@@ -165,7 +170,7 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    SearchItem *item = self.items[indexPath.row];
+    MLSearchItem *item = self.items[indexPath.row];
     MLItemDetailViewController * detailView= [[MLItemDetailViewController alloc] initWithNibName:nil bundle:nil andItem:item ];
     [self.navigationController pushViewController:detailView animated:YES];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
