@@ -13,6 +13,7 @@
 #import "MLSearchService.h"
 #import "MLThumbnailService.h"
 #import "MLDaoManager.h"
+#import "MLNoResultsViewController.h"
 #define kProductCellHeight 72
 #define kOffsetBlock 15
 @interface MLItemListViewController ()<MLSearchManagerDelegate>
@@ -59,7 +60,6 @@
     self.tableView.dataSource = self;
     [self setTitle:@"Resultados"];
     [self.searchService startFetchingItemsWithInput:self.input andOffset:0];
-    //[self startFetchingItemsWithInput];
 }
 
 #pragma mark - Notification Observer
@@ -92,6 +92,13 @@
 
 -(void)didNotReceiveItems{
     //should push a noResultsViewController
+    NSLog(@"0Resultados");
+    //Should dispasch in main sync or with a barrier, navigation gets inconsistent sometimes
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MLNoResultsViewController * noResultsView= [[MLNoResultsViewController alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:noResultsView animated:YES];
+    });
 }
 
 #pragma mark - Table View

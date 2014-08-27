@@ -15,6 +15,11 @@
 		4E65CBD819ACDC720082999F /* MLDaoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65CBD719ACDC720082999F /* MLDaoManager.m */; };
 		4E65CBDB19ACDC850082999F /* MLDaoFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65CBDA19ACDC850082999F /* MLDaoFilesystem.m */; };
 		4E65CBDE19ACDC920082999F /* MLDaoMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65CBDD19ACDC920082999F /* MLDaoMemory.m */; };
+		4E65CBE319AE5F0F0082999F /* MLNoResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65CBE119AE5F0F0082999F /* MLNoResultsViewController.m */; };
+		4E65CBE419AE5F0F0082999F /* MLNoResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E65CBE219AE5F0F0082999F /* MLNoResultsViewController.xib */; };
+		4E65CBEA19AE67870082999F /* MLImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65CBE919AE67870082999F /* MLImageCollectionViewCell.m */; };
+		4E65CBEE19AE67D80082999F /* MLImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E65CBED19AE67D80082999F /* MLImageCollectionViewCell.xib */; };
+		4E65CBF919AE88C50082999F /* MLWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65CBF819AE88C50082999F /* MLWebService.m */; };
 		4E7EF48A19A7719200ABAECD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7EF48919A7719200ABAECD /* Foundation.framework */; };
 		4E7EF48C19A7719200ABAECD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7EF48B19A7719200ABAECD /* CoreGraphics.framework */; };
 		4E7EF48E19A7719200ABAECD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7EF48D19A7719200ABAECD /* UIKit.framework */; };
@@ -78,6 +83,14 @@
 		4E65CBDC19ACDC920082999F /* MLDaoMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLDaoMemory.h; sourceTree = "<group>"; };
 		4E65CBDD19ACDC920082999F /* MLDaoMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDaoMemory.m; sourceTree = "<group>"; };
 		4E65CBDF19ACDCAD0082999F /* MLDaoDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLDaoDelegate.h; sourceTree = "<group>"; };
+		4E65CBE019AE5F0F0082999F /* MLNoResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNoResultsViewController.h; sourceTree = "<group>"; };
+		4E65CBE119AE5F0F0082999F /* MLNoResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNoResultsViewController.m; sourceTree = "<group>"; };
+		4E65CBE219AE5F0F0082999F /* MLNoResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLNoResultsViewController.xib; sourceTree = "<group>"; };
+		4E65CBE819AE67870082999F /* MLImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImageCollectionViewCell.h; sourceTree = "<group>"; };
+		4E65CBE919AE67870082999F /* MLImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImageCollectionViewCell.m; sourceTree = "<group>"; };
+		4E65CBED19AE67D80082999F /* MLImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		4E65CBF719AE88C50082999F /* MLWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLWebService.h; sourceTree = "<group>"; };
+		4E65CBF819AE88C50082999F /* MLWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLWebService.m; sourceTree = "<group>"; };
 		4E7EF48619A7719200ABAECD /* Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7EF48919A7719200ABAECD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4E7EF48B19A7719200ABAECD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -260,6 +273,12 @@
 				4ED19F8E19AB891C0056FD03 /* MLHistoryTableViewCell.h */,
 				4ED19F8F19AB891C0056FD03 /* MLHistoryTableViewCell.m */,
 				4ED19F9019AB891C0056FD03 /* MLHistoryTableViewCell.xib */,
+				4E65CBE019AE5F0F0082999F /* MLNoResultsViewController.h */,
+				4E65CBE119AE5F0F0082999F /* MLNoResultsViewController.m */,
+				4E65CBE219AE5F0F0082999F /* MLNoResultsViewController.xib */,
+				4E65CBE819AE67870082999F /* MLImageCollectionViewCell.h */,
+				4E65CBE919AE67870082999F /* MLImageCollectionViewCell.m */,
+				4E65CBED19AE67D80082999F /* MLImageCollectionViewCell.xib */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -297,6 +316,8 @@
 			children = (
 				4E7EF4F219A7872F00ABAECD /* MLHistoryItem.h */,
 				4E7EF4F319A7872F00ABAECD /* MLHistoryItem.m */,
+				4E65CBF719AE88C50082999F /* MLWebService.h */,
+				4E65CBF819AE88C50082999F /* MLWebService.m */,
 				4ED19F8019AB827B0056FD03 /* MLSearchService.h */,
 				4ED19F8119AB827B0056FD03 /* MLSearchService.m */,
 				4ED19F8319AB82AD0056FD03 /* MLThumbnailService.h */,
@@ -310,9 +331,9 @@
 				4E65CBDF19ACDCAD0082999F /* MLDaoDelegate.h */,
 				4E7EF4BC19A77B5B00ABAECD /* MLSearchItem.h */,
 				4E7EF4BD19A77B5B00ABAECD /* MLSearchItem.m */,
-				4E7EF4BE19A77B5B00ABAECD /* SearchCommunicatorDelegate.h */,
 				4E7EF4C119A77B5B00ABAECD /* MLItemBuilder.h */,
 				4E7EF4C219A77B5B00ABAECD /* MLItemBuilder.m */,
+				4E7EF4BE19A77B5B00ABAECD /* SearchCommunicatorDelegate.h */,
 				4E7EF4C319A77B5B00ABAECD /* MLSearchManagerDelegate.h */,
 			);
 			name = Models;
@@ -403,10 +424,12 @@
 				4ED19F7C19A7AACC0056FD03 /* ProductTableViewCell.xib in Resources */,
 				4E7EF4F019A785D900ABAECD /* mercadolibre@2x.png in Resources */,
 				4ED19F9219AB891C0056FD03 /* MLHistoryTableViewCell.xib in Resources */,
+				4E65CBE419AE5F0F0082999F /* MLNoResultsViewController.xib in Resources */,
 				4E65CBD519ACD0100082999F /* noPicP@2x.png in Resources */,
 				4E7EF4E819A7833800ABAECD /* searchTabBar@2x.png in Resources */,
 				4E65CBD319ACD0100082999F /* noPicItemList_ar.gif in Resources */,
 				4E7EF49C19A7719200ABAECD /* Images.xcassets in Resources */,
+				4E65CBEE19AE67D80082999F /* MLImageCollectionViewCell.xib in Resources */,
 				4E7EF4E719A7833800ABAECD /* searchTabBar.png in Resources */,
 				4E65CBD219ACD0100082999F /* noPicI@2x.png in Resources */,
 				4E65CBD419ACD0100082999F /* noPicP.png in Resources */,
@@ -436,10 +459,12 @@
 				4E7EF49619A7719200ABAECD /* main.m in Sources */,
 				4E65CBDE19ACDC920082999F /* MLDaoMemory.m in Sources */,
 				4ED19F9119AB891C0056FD03 /* MLHistoryTableViewCell.m in Sources */,
+				4E65CBE319AE5F0F0082999F /* MLNoResultsViewController.m in Sources */,
 				4ED19F9619AB8C980056FD03 /* MLItemDetailViewController.m in Sources */,
 				4E7EF4DD19A77BFA00ABAECD /* MBProgressHUD.m in Sources */,
 				4ED19F9B19AB8E1C0056FD03 /* MLItemListViewController.m in Sources */,
 				4E7EF49A19A7719200ABAECD /* MLAppDelegate.m in Sources */,
+				4E65CBEA19AE67870082999F /* MLImageCollectionViewCell.m in Sources */,
 				4E65CBDB19ACDC850082999F /* MLDaoFilesystem.m in Sources */,
 				4ED19F7F19A7AB960056FD03 /* ProductTableViewCell.m in Sources */,
 				4E7EF4F419A7872F00ABAECD /* MLHistoryItem.m in Sources */,
@@ -450,6 +475,7 @@
 				4ED19F8D19AB87C60056FD03 /* MLAbstractViewController.m in Sources */,
 				4E7EF4E219A77D9200ABAECD /* MLFavouritesViewController.m in Sources */,
 				4E7EF4F719A7952100ABAECD /* NSDate+Utilities.m in Sources */,
+				4E65CBF919AE88C50082999F /* MLWebService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MLSearchItem.h"
 
-@interface MLItemDetailViewController : UIViewController
+@interface MLItemDetailViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(MLSearchItem*)item;
 @end
