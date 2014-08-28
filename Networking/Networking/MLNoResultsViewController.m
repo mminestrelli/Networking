@@ -2,7 +2,7 @@
 //  MLNoResultsViewController.m
 //  Networking
 //
-//  Created by Mauricio Minestrelli on 8/27/14.
+//  Created by Mauricio Minestrelli on 8/28/14.
 //  Copyright (c) 2014 mercadolibre. All rights reserved.
 //
 
@@ -27,20 +27,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.hidesBackButton=YES;
-    self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]
-                                             initWithTitle:@"Volver" style: UIBarButtonItemStyleDone target:self action:@selector(toRootButtonPressed)] ;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark selectors
--(void) toRootButtonPressed{
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

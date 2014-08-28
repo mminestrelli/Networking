@@ -59,6 +59,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self setTitle:@"Resultados"];
+    [self loadingHud];
     [self.searchService startFetchingItemsWithInput:self.input andOffset:0];
 }
 
@@ -72,6 +73,7 @@
 #pragma mark - SearchManagerDelegate
 - (void)didReceiveItems:(NSArray *)items
 {
+    [self finishingHUD];
     if (self.items == nil){
         self.items= [NSMutableArray arrayWithArray:items] ;
     }else{
@@ -92,12 +94,11 @@
 
 -(void)didNotReceiveItems{
     //should push a noResultsViewController
-    NSLog(@"0Resultados");
-    //Should dispasch in main sync or with a barrier, navigation gets inconsistent sometimes
-    
+    NSLog(@"0 resultados");
+    [self finishingHUD];
     dispatch_async(dispatch_get_main_queue(), ^{
-        MLNoResultsViewController * noResultsView= [[MLNoResultsViewController alloc] initWithNibName:nil bundle:nil];
-        [self.navigationController pushViewController:noResultsView animated:YES];
+        MLNoResultsViewController * noResultsView = [[MLNoResultsViewController alloc]initWithNibName:nil bundle:nil];
+        [self.view addSubview:noResultsView.view];
     });
 }
 
@@ -165,10 +166,10 @@
     {
         if(lastCell!= self.lastVisibleCell){
             self.lastVisibleCell=lastCell;
-//            UIActivityIndicatorView * spinner= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//            [spinner startAnimating];
-//            spinner.frame = CGRectMake(0, 0, 320, 44);
-//            self.tableViewSearch.tableFooterView =spinner;
+            //            UIActivityIndicatorView * spinner= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            //            [spinner startAnimating];
+            //            spinner.frame = CGRectMake(0, 0, 320, 44);
+            //            self.tableViewSearch.tableFooterView =spinner;
             [self.searchService fetchNextPage];
         }
     }

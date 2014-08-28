@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "SearchCommunicatorDelegate.h"
-#import "MLSearchManagerDelegate.h"
+#import "MLWebServiceDelegate.h"
 @interface MLWebService : NSObject<MLSearchCommunicatorDelegate>
-@property (weak, nonatomic) id<MLSearchManagerDelegate> delegate;
+
+@property (weak, nonatomic) id<MLWebServiceDelegate> delegate;
+- (void)startFetchingItemsWithInput:(NSString*)input;
 @end

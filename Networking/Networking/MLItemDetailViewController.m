@@ -8,8 +8,11 @@
 
 #import "MLItemDetailViewController.h"
 #import "MLImageCollectionViewCell.h"
+#import "MLWebService.h"
+#import "MLSearchItem.h"
+#import "MLThumbnailService.h"
 
-@interface MLItemDetailViewController ()
+@interface MLItemDetailViewController ()<MLWebServiceDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelPrice;
 - (IBAction)buyButtonPressed:(id)sender;
@@ -17,9 +20,12 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControlGallery;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewPhotoGallery;
 
+@property (nonatomic,strong) MLWebService * webService;
+@property (nonatomic,strong) MLThumbnailService * imageService;
 //mock
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic,strong) MLSearchItem* searchItem;
 
 
 @end
@@ -31,6 +37,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        self.webService= [[MLWebService alloc]init];
+        self.imageService=[[MLThumbnailService alloc]init];
+        self.searchItem=item;
     }
     return self;
 }
@@ -39,10 +49,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self loadImages];
+    //[self loadImages];
     [self setupCollectionView];
+    self.webService.delegate=self;
     self.pageControlGallery.hidden = YES;
     self.pageControlGallery.numberOfPages=[self.dataArray count];
+    [self.webService startFetchingItemsWithInput:self.searchItem.identifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,10 +96,11 @@
     MLImageCollectionViewCell *cell = (MLImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     self.pageControlGallery.currentPage = indexPath.row;
     self.pageControlGallery.hidden = NO;
-    NSString *imageName = [self.dataArray objectAtIndex:indexPath.row];
-    [cell setImageName:imageName];
-    [cell updateCell];
-    
+//    NSString *imageName = [self.dataArray objectAtIndex:indexPath.row];
+//    
+//    [cell setImageName:imageName];
+//    [cell updateCell];
+    [cell setImage:[self.dataArray objectAtIndex:indexPath.row]];
     return cell;
     
 }
@@ -102,6 +115,33 @@
     
     NSString *sourcePath = @"/Users/mminestrelli/Desktop/images";
     self.dataArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
+    [self.collectionViewPhotoGallery reloadData];
+    
+}
+-(void)loadImagesWithItem:(MLSearchItem*)item {
+    
+    NSMutableArray * _images=[[NSMutableArray alloc]init];
+    NSInteger counter=0;
+    self.searchItem=item;
+    self.labelTitle.text=item.title;
+    self.labelPrice.text=[NSString stringWithFormat:@"%f",[item.price floatValue]];
+    
+    for (counter=0;counter<[self.searchItem.pictures count];counter++) {
+        NSURL* url=[NSURL URLWithString:[self.searchItem.pictures objectAtIndex:counter]];
+        [self.imageService downloadImageWithURL:url usingQueue:[NSOperationQueue mainQueue] withCompletionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                // Update UI on the main thread.
+                //[[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+                    [_images addObject:image];
+                //}];
+                self.dataArray= _images;
+                [self.collectionViewPhotoGallery reloadData];
+                // cache the image for use later (when scrolling up)
+                //[daoManager saveThumbnail:image withId:item.identifier];
+            }
+        }];
+                    }
     
 }
 
@@ -135,6 +175,16 @@
     }];
     
 }
+#pragma mark - search manager delegates
+- (void)didReceiveItem:(MLSearchItem*)item{
+    [self loadImagesWithItem:item];
+}
 
+-(void)didNotReceiveItem{
+    
+}
+-(void)fetchingItemsFailedWithError:(NSError *)error{
+    NSLog(@"Error %@; %@", error, [error localizedDescription]);
+}
 
 @end

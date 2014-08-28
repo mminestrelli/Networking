@@ -54,4 +54,9 @@
     
 }
 
+-(void) setImage:(UIImage*) image{
+    [self.imageViewPhoto setImage:image];
+    [self.imageViewPhoto setContentMode:UIViewContentModeScaleAspectFit];
+}
+
 @end

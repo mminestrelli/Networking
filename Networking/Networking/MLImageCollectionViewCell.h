@@ -11,4 +11,5 @@
 @interface MLImageCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) NSString *imageName;
 -(void)updateCell;
+-(void) setImage:(UIImage*) image;
 @end

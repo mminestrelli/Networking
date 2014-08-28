@@ -2,12 +2,12 @@
 //  MLNoResultsViewController.h
 //  Networking
 //
-//  Created by Mauricio Minestrelli on 8/27/14.
+//  Created by Mauricio Minestrelli on 8/28/14.
 //  Copyright (c) 2014 mercadolibre. All rights reserved.
 //
 
-#import "MLAbstractViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface MLNoResultsViewController : MLAbstractViewController
+@interface MLNoResultsViewController : UIViewController
 
 @end
