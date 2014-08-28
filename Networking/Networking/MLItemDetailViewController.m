@@ -8,7 +8,7 @@
 
 #import "MLItemDetailViewController.h"
 #import "MLImageCollectionViewCell.h"
-#import "MLWebService.h"
+#import "MLVipService.h"
 #import "MLSearchItem.h"
 #import "MLThumbnailService.h"
 
@@ -20,11 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControlGallery;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewPhotoGallery;
 
-@property (nonatomic,strong) MLWebService * webService;
+@property (nonatomic,strong) MLVipService * vipService;
 @property (nonatomic,strong) MLThumbnailService * imageService;
 //mock
 @property (nonatomic) int currentIndex;
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSArray *imagesFromService;
 @property (nonatomic,strong) MLSearchItem* searchItem;
 
 
@@ -38,7 +38,7 @@
     if (self) {
         // Custom initialization
         
-        self.webService= [[MLWebService alloc]init];
+        self.vipService= [[MLVipService alloc]init];
         self.imageService=[[MLThumbnailService alloc]init];
         self.searchItem=item;
     }
@@ -51,10 +51,10 @@
     // Do any additional setup after loading the view from its nib.
     //[self loadImages];
     [self setupCollectionView];
-    self.webService.delegate=self;
+    self.vipService.delegate=self;
     self.pageControlGallery.hidden = YES;
-    self.pageControlGallery.numberOfPages=[self.dataArray count];
-    [self.webService startFetchingItemsWithInput:self.searchItem.identifier];
+    [self loadingHud];
+    [self.vipService startFetchingItemsWithInput:self.searchItem.identifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,19 +88,16 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.dataArray count];
+    return [self.imagesFromService count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     MLImageCollectionViewCell *cell = (MLImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     self.pageControlGallery.currentPage = indexPath.row;
+    self.pageControlGallery.numberOfPages=[self.imagesFromService count];
     self.pageControlGallery.hidden = NO;
-//    NSString *imageName = [self.dataArray objectAtIndex:indexPath.row];
-//    
-//    [cell setImageName:imageName];
-//    [cell updateCell];
-    [cell setImage:[self.dataArray objectAtIndex:indexPath.row]];
+    [cell setImage:[self.imagesFromService objectAtIndex:indexPath.row]];
     return cell;
     
 }
@@ -111,13 +108,7 @@
 
 #pragma mark -
 #pragma mark Data methods
--(void)loadImages {
-    
-    NSString *sourcePath = @"/Users/mminestrelli/Desktop/images";
-    self.dataArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
-    [self.collectionViewPhotoGallery reloadData];
-    
-}
+
 -(void)loadImagesWithItem:(MLSearchItem*)item {
     
     NSMutableArray * _images=[[NSMutableArray alloc]init];
@@ -128,20 +119,19 @@
     
     for (counter=0;counter<[self.searchItem.pictures count];counter++) {
         NSURL* url=[NSURL URLWithString:[self.searchItem.pictures objectAtIndex:counter]];
-        [self.imageService downloadImageWithURL:url usingQueue:[NSOperationQueue mainQueue] withCompletionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
+        [self.imageService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:
+            ^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
                 // change the image in the cell
                 // Update UI on the main thread.
-                //[[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
-                    [_images addObject:image];
-                //}];
-                self.dataArray= _images;
-                [self.collectionViewPhotoGallery reloadData];
-                // cache the image for use later (when scrolling up)
-                //[daoManager saveThumbnail:image withId:item.identifier];
-            }
-        }];
-                    }
+                    [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+                        [_images addObject:image];
+                        self.imagesFromService= _images;
+                        [self.collectionViewPhotoGallery reloadData];
+                    }];
+                }
+            }];
+    }
     
 }
 
@@ -177,6 +167,7 @@
 }
 #pragma mark - search manager delegates
 - (void)didReceiveItem:(MLSearchItem*)item{
+    [self endHud];
     [self loadImagesWithItem:item];
 }
 
@@ -186,5 +177,6 @@
 -(void)fetchingItemsFailedWithError:(NSError *)error{
     NSLog(@"Error %@; %@", error, [error localizedDescription]);
 }
+
 
 @end

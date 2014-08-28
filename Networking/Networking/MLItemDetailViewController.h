@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MLSearchItem.h"
+#import "MLAbstractViewController.h"
 
-@interface MLItemDetailViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface MLItemDetailViewController : MLAbstractViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(MLSearchItem*)item;
 @end

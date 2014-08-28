@@ -33,26 +33,6 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
--(void)updateCell {
-    
-    NSString *sourcePath = @"/Users/mminestrelli/Desktop/images";
-    NSString *filename = [NSString stringWithFormat:@"%@/%@", sourcePath, self.imageName];
-    
-    UIImage *image = [UIImage imageWithContentsOfFile:filename];
-    
-    [self.imageViewPhoto setImage:image];
-    [self.imageViewPhoto setContentMode:UIViewContentModeScaleAspectFit];
-    
-}
 
 -(void) setImage:(UIImage*) image{
     [self.imageViewPhoto setImage:image];

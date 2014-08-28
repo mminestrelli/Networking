@@ -12,5 +12,5 @@
 @interface MLWebService : NSObject<MLSearchCommunicatorDelegate>
 
 @property (weak, nonatomic) id<MLWebServiceDelegate> delegate;
-- (void)startFetchingItemsWithInput:(NSString*)input;
+- (void)startFetchingItemsWithUrl:(NSURL*)url;
 @end

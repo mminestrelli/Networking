@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface MLAbstractViewController : UIViewController
-
+@interface MLAbstractViewController : UIViewController{
+    MBProgressHUD *HUD;
+}
+@property (nonatomic,strong) NSOperationQueue* thumbnailDownloadQueue;
+-(void) loadingHud;
+-(void) endHud;
 @end

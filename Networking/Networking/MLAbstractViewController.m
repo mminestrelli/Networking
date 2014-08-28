@@ -7,7 +7,7 @@
 //
 
 #import "MLAbstractViewController.h"
-
+#define kOffsetBlock 15
 @interface MLAbstractViewController ()
 
 @end
@@ -19,6 +19,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.thumbnailDownloadQueue = [[NSOperationQueue alloc] init];
+        self.thumbnailDownloadQueue.name = @"Download Queue";
+        self.thumbnailDownloadQueue.maxConcurrentOperationCount=kOffsetBlock;
     }
     return self;
 }
@@ -38,6 +41,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma mark progress hud animation
+-(void)endHud{
+    HUD.mode = MBProgressHUDModeText;
+	HUD.labelText = @"Listo!";
+    [HUD hide:YES afterDelay:0.3];
+    //[HUD hide:YES];
+}
+-(void) loadingHud{
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+	// Configure for text only and offset down
+	HUD.mode = MBProgressHUDModeIndeterminate;
+	HUD.labelText = @"Conectando";
+	HUD.removeFromSuperViewOnHide = YES;
+    
+}
 
 @end

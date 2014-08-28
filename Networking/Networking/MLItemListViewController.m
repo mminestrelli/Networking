@@ -15,7 +15,7 @@
 #import "MLDaoManager.h"
 #import "MLNoResultsViewController.h"
 #define kProductCellHeight 72
-#define kOffsetBlock 15
+
 @interface MLItemListViewController ()<MLSearchManagerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *items;
@@ -38,9 +38,6 @@
         self.searchService = [[MLSearchService alloc]init];
         self.thumbnailService=[[MLThumbnailService
                                 alloc]init];
-        self.thumbnailDownloadQueue = [[NSOperationQueue alloc] init];
-        self.thumbnailDownloadQueue.name = @"Download Queue";
-        self.thumbnailDownloadQueue.maxConcurrentOperationCount=kOffsetBlock;
     }
     return self;
 }
@@ -73,16 +70,15 @@
 #pragma mark - SearchManagerDelegate
 - (void)didReceiveItems:(NSArray *)items
 {
-    [self finishingHUD];
+    [self endHud];
     if (self.items == nil){
         self.items= [NSMutableArray arrayWithArray:items] ;
     }else{
         [self.items addObjectsFromArray:items];
     }
-    //????
     dispatch_async(dispatch_get_main_queue(), ^{
+        //redraw UI in mainQueue
         [self.tableView reloadData];
-        //[self finishingHUD];
     });
     
 }
@@ -95,7 +91,7 @@
 -(void)didNotReceiveItems{
     //should push a noResultsViewController
     NSLog(@"0 resultados");
-    [self finishingHUD];
+    [self endHud];
     dispatch_async(dispatch_get_main_queue(), ^{
         MLNoResultsViewController * noResultsView = [[MLNoResultsViewController alloc]initWithNibName:nil bundle:nil];
         [self.view addSubview:noResultsView.view];
@@ -166,10 +162,10 @@
     {
         if(lastCell!= self.lastVisibleCell){
             self.lastVisibleCell=lastCell;
-            //            UIActivityIndicatorView * spinner= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            //            [spinner startAnimating];
-            //            spinner.frame = CGRectMake(0, 0, 320, 44);
-            //            self.tableViewSearch.tableFooterView =spinner;
+                        UIActivityIndicatorView * spinner= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                        [spinner startAnimating];
+                        spinner.frame = CGRectMake(0, 0, 320, 44);
+                        self.tableView.tableFooterView =spinner;
             [self.searchService fetchNextPage];
         }
     }
@@ -184,21 +180,5 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark progress hud animation
--(void)finishingHUD{
-    HUD.mode = MBProgressHUDModeText;
-	HUD.labelText = @"Listo!";
-    [HUD hide:YES afterDelay:0.3];
-    //[HUD hide:YES];
-}
--(void) loadingHud{
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-	// Configure for text only and offset down
-	HUD.mode = MBProgressHUDModeIndeterminate;
-	HUD.labelText = @"Conectando";
-	HUD.removeFromSuperViewOnHide = YES;
-    
-}
 
 @end
