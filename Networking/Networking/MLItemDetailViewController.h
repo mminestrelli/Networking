@@ -10,6 +10,7 @@
 #import "MLSearchItem.h"
 #import "MLAbstractViewController.h"
 
+
 @interface MLItemDetailViewController : MLAbstractViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(MLSearchItem*)item;
 @end

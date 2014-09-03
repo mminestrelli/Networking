@@ -12,7 +12,7 @@
 #import "MLItemDetailViewController.h"
 #import "MLSearchService.h"
 #import "MLThumbnailService.h"
-#import "MLDaoManager.h"
+#import "MLDaoImageManager.h"
 #import "MLNoResultsViewController.h"
 #define kProductCellHeight 72
 
@@ -25,6 +25,8 @@
 @property (nonatomic,strong) MLSearchService* searchService;
 @property (nonatomic,strong) MLThumbnailService* thumbnailService;
 @property (nonatomic,strong) NSOperationQueue* thumbnailDownloadQueue;
+
+@property (nonatomic,copy) NSString * myString;
 
 @end
 
@@ -59,13 +61,6 @@
     [self loadingHud];
     [self.searchService startFetchingItemsWithInput:self.input andOffset:0];
 }
-
-#pragma mark - Notification Observer
-//- (void)startFetchingItemsWithInput
-//{
-//    [self loadingHud];
-//    [self.manager fetchItemsWithInput:self.input];
-//}
 
 #pragma mark - SearchManagerDelegate
 - (void)didReceiveItems:(NSArray *)items
@@ -102,56 +97,41 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
+
     return self.items.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     return kProductCellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProductTableViewCell * cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    MLDaoManager * daoManager=[MLDaoManager sharedManager];
     
+    ProductTableViewCell * cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    
-    MLSearchItem *item = self.items[indexPath.row];
-    [cell.labeltitle setText:item.title];
-    NSString* soldQty=[NSString stringWithFormat:@"%d%@",item.sold_quantity,@" vendidos." ];
-    [cell.labelPrice setText:[NSString stringWithFormat:@"%@",item.price ]];
-    [cell.labelSubtitle setText:soldQty];
-    NSURL *url = [NSURL URLWithString:item.thumbnail];
-    
-    //Product without image
-    if([item.thumbnail isEqualToString:@"" ]){
-        cell.imageViewPreview.image = [UIImage imageNamed:@"noPicI.png"];
-    }
-    else{
-        if([daoManager isImageCachedWithId:item.identifier]){
-            cell.imageViewPreview.image =[daoManager getThumbnailWithId:item.identifier];
-        }else{
-            // download the image asynchronously
-            [self.thumbnailService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    // Update UI on the main thread.
-                    [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
-                        cell.imageViewPreview.image = image;
-                    }];
-                    
-                    // cache the image for use later (when scrolling up)
-                    [daoManager saveThumbnail:image withId:item.identifier];
-                }
-            }];
-        }
-    }
     return cell;
+}
+
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+    MLSearchItem *item = self.items[indexPath.row];
+    [(ProductTableViewCell*)cell fillCellWithItem:item];
+}
+-(void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //Cancel
+    //no deberia haber tantos ifs el manager deberia encargarse de darme una imagen no me importa de donde
+    //debería tener
+
+    [(ProductTableViewCell *)cell cancelService];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

@@ -26,6 +26,8 @@
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) NSArray *imagesFromService;
 @property (nonatomic,strong) MLSearchItem* searchItem;
+@property (nonatomic,strong) UIActivityIndicatorView* spinner;
+
 
 
 @end
@@ -52,6 +54,7 @@
     //[self loadImages];
     [self setupCollectionView];
     self.vipService.delegate=self;
+    //self.imageService.delegate=self;
     self.pageControlGallery.hidden = YES;
     [self loadingHud];
     [self.vipService startFetchingItemsWithInput:self.searchItem.identifier];
@@ -116,26 +119,38 @@
     self.searchItem=item;
     self.labelTitle.text=item.title;
     self.labelPrice.text=[NSString stringWithFormat:@"%f",[item.price floatValue]];
-    
     for (counter=0;counter<[self.searchItem.pictures count];counter++) {
         NSURL* url=[NSURL URLWithString:[self.searchItem.pictures objectAtIndex:counter]];
+        //[self.imageService downloadImageWithURL:url];
+        self.spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.spinner.center = CGPointMake(self.collectionViewPhotoGallery.frame.size.width/2,self.collectionViewPhotoGallery.frame.size.height/2);
+        [self.collectionViewPhotoGallery addSubview:self.spinner];
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [self.spinner startAnimating];
+        });
+        
         [self.imageService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:
             ^(BOOL succeeded, UIImage *image) {
                 if (succeeded) {
                 // change the image in the cell
                 // Update UI on the main thread.
                     [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+                        
                         [_images addObject:image];
                         self.imagesFromService= _images;
+                        if ([self.spinner isAnimating]) {
+                            [self.spinner stopAnimating];
+                        }
                         [self.collectionViewPhotoGallery reloadData];
+                        
                     }];
                 }
             }];
+        
     }
     
 }
 
-#pragma mark -
 #pragma mark Rotation handling methods
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:
@@ -165,10 +180,13 @@
     }];
     
 }
+
 #pragma mark - search manager delegates
 - (void)didReceiveItem:(MLSearchItem*)item{
     [self endHud];
     [self loadImagesWithItem:item];
+    
+
 }
 
 -(void)didNotReceiveItem{

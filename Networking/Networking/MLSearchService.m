@@ -8,7 +8,7 @@
 
 #import "MLSearchService.h"
 #import "MLItemBuilder.h"
-#define kOffsetIncrement 15
+#define kOffsetIncrement 50
 @interface MLSearchService()
 @property (nonatomic) NSInteger currentOffset;
 @property (nonatomic,copy) NSString* lastSearch;
@@ -24,6 +24,8 @@
     NSString *urlAsString = [NSString stringWithFormat:@"https://api.mercadolibre.com/sites/MLA/search?q=%@&limit=%d&offset=%d",planeInput,kOffsetIncrement,offset ];
     NSURL *url = [[NSURL alloc] initWithString:urlAsString];
     NSLog(@"%@", urlAsString);
+    
+
     
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         

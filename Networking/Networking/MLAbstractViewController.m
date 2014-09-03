@@ -43,18 +43,20 @@
 
 #pragma mark progress hud animation
 -(void)endHud{
-    HUD.mode = MBProgressHUDModeText;
-	HUD.labelText = @"Listo!";
-    [HUD hide:YES afterDelay:0.3];
-    //[HUD hide:YES];
+    self.progressHud.mode = MBProgressHUDModeText;
+	self.progressHud.labelText = @"Listo!";
+    //[HUD hide:YES afterDelay:0.3];
+    [self.progressHud hide:YES];
 }
 -(void) loadingHud{
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [self endHud];
+    
+    self.progressHud = [[MBProgressHUD alloc] initWithView:self.view];
+    self.progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	// Configure for text only and offset down
-	HUD.mode = MBProgressHUDModeIndeterminate;
-	HUD.labelText = @"Conectando";
-	HUD.removeFromSuperViewOnHide = YES;
+	self.progressHud.mode = MBProgressHUDModeIndeterminate;
+	self.progressHud.labelText = @"Conectando";
+	self.progressHud.removeFromSuperViewOnHide = YES;
     
 }
 

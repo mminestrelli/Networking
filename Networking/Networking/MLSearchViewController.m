@@ -9,7 +9,7 @@
 #import "MLSearchViewController.h"
 #import "MLItemListViewController.h"
 #import "MLHistoryTableViewCell.h"
-#import "MLDaoManager.h"
+#import "MLDaoHistoryManager.h"
 
 #define kHistoryCellHeight 36;
 
@@ -40,14 +40,9 @@
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];
     [self.searchBar setPlaceholder:@"Buscar en Mercadolibre"];
     
-    if ([[MLDaoManager sharedManager] getHistory]!=nil) {
-        self.history=[[MLDaoManager sharedManager] getHistory];
+    if ([[MLDaoHistoryManager sharedManager] getHistory]!=nil) {
+        self.history=[[MLDaoHistoryManager sharedManager] getHistory];
     }
-    //self.history=[[MLDaoManager sharedManager] getHistory];
-    
-    //Mock add
-//    [self.history addObject:[[MLHistoryItem alloc]initWithItem:@"ipod" andDate:[NSDate dateWithHoursBeforeNow:48]]];
-//    [self.history addObject:[[MLHistoryItem alloc]initWithItem:@"ipad"andDate:[NSDate dateWithHoursBeforeNow:5]]];
     
     [self setTitle:@"Buscar"];
 }
@@ -96,7 +91,12 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MLHistoryItem* item=[self.history objectAtIndex:indexPath.row];
+    [self.history removeObject:item];
+    [self.history addObject:[[MLHistoryItem alloc]initWithItem:item.searchedItem andDate:[NSDate date]]];
+    [[MLDaoHistoryManager sharedManager] saveHistory:self.history];
     [self searchFromHistoryWithInput:item.searchedItem];
+    [self.tableViewHistory deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableViewHistory reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -114,8 +114,8 @@
     [self dismissKeyboard];
     
     [self.history addObject:[[MLHistoryItem alloc]initWithItem:self.searchBar.text andDate:[NSDate date]]];
-    MLDaoManager * daoManager=[MLDaoManager sharedManager];
-    [daoManager saveHistory:self.history];
+    MLDaoHistoryManager * daoHistoryManager=[MLDaoHistoryManager sharedManager];
+    [daoHistoryManager saveHistory:self.history];
     [self.tableViewHistory reloadData];
     
     MLItemListViewController * controller=[[MLItemListViewController alloc]initWithInput:self.searchBar.text];

@@ -10,7 +10,7 @@
 #import "MLSearchItem.h"
 
 @implementation MLWebService
-/*Url request with input. Spaces are replaced by %20. Error and success callbacks*/
+
 - (void)startFetchingItemsWithUrl:(NSURL*)url
 {
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {

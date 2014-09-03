@@ -9,7 +9,7 @@
 #import "MLVipService.h"
 
 @implementation MLVipService
-/*Url request with input. Spaces are replaced by %20. Error and success callbacks*/
+
 - (void)startFetchingItemsWithInput:(NSString*)input
 {
     NSString *urlAsString = [NSString stringWithFormat:@"https://api.mercadolibre.com/items/%@",input ];
@@ -17,15 +17,6 @@
     NSLog(@"%@", urlAsString);
     
     [super startFetchingItemsWithUrl:url];
-    //Cada vez estoy allocando una queue
-//    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        
-//        if (error) {
-//            [self fetchingItemsFailedWithError:error];
-//        } else {
-//            [self receivedItemsJSON:data];
-//        }
-//    }];
 }
 
 - (void)receivedItemsJSON:(NSData *)objectNotation
@@ -44,11 +35,6 @@
         }
         
     }
-}
-
-- (void)fetchingItemsFailedWithError:(NSError *)error
-{
-    [self.delegate fetchingItemsFailedWithError:error];
 }
 
 - (MLSearchItem *)itemsFromJSON:(NSData *)objectNotation error:(NSError **)error
@@ -79,4 +65,5 @@
     item.pictures=picturesUrls;
     return item;
 }
+
 @end
