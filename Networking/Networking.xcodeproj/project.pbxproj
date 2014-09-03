@@ -47,6 +47,7 @@
 		4E7EF4F419A7872F00ABAECD /* MLHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4F319A7872F00ABAECD /* MLHistoryItem.m */; };
 		4E7EF4F719A7952100ABAECD /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4F619A7952100ABAECD /* NSDate+Utilities.m */; };
 		4E94B82419B5F8A8000E0ABF /* MLDaoHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */; };
+		4E94B82719B7C198000E0ABF /* MLKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82619B7C198000E0ABF /* MLKeyboardToolbar.m */; };
 		4ED19F7C19A7AACC0056FD03 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ED19F7B19A7AACC0056FD03 /* ProductTableViewCell.xib */; };
 		4ED19F7F19A7AB960056FD03 /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */; };
 		4ED19F8219AB827B0056FD03 /* MLSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8119AB827B0056FD03 /* MLSearchService.m */; };
@@ -135,6 +136,8 @@
 		4E94B82119B0BE73000E0ABF /* MLThumbnailResponseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLThumbnailResponseDelegate.h; sourceTree = "<group>"; };
 		4E94B82219B5F8A8000E0ABF /* MLDaoHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLDaoHistoryManager.h; sourceTree = "<group>"; };
 		4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDaoHistoryManager.m; sourceTree = "<group>"; };
+		4E94B82519B7C198000E0ABF /* MLKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKeyboardToolbar.h; sourceTree = "<group>"; };
+		4E94B82619B7C198000E0ABF /* MLKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKeyboardToolbar.m; sourceTree = "<group>"; };
 		4ED19F7B19A7AACC0056FD03 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductTableViewCell.xib; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.xib"; sourceTree = "<group>"; };
 		4ED19F7D19A7AB960056FD03 /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductTableViewCell.h; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.h"; sourceTree = "<group>"; };
 		4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductTableViewCell.m; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.m"; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				4E7EF49219A7719200ABAECD /* InfoPlist.strings */,
 				4E7EF49519A7719200ABAECD /* main.m */,
 				4E7EF49719A7719200ABAECD /* Networking-Prefix.pch */,
+				4E94B82519B7C198000E0ABF /* MLKeyboardToolbar.h */,
+				4E94B82619B7C198000E0ABF /* MLKeyboardToolbar.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				4ED19F8919AB86950056FD03 /* MLSearchViewController.m in Sources */,
 				4E7EF49619A7719200ABAECD /* main.m in Sources */,
 				4E65CBDE19ACDC920082999F /* MLDaoMemory.m in Sources */,
+				4E94B82719B7C198000E0ABF /* MLKeyboardToolbar.m in Sources */,
 				4ED19F9119AB891C0056FD03 /* MLHistoryTableViewCell.m in Sources */,
 				4ED19F9619AB8C980056FD03 /* MLItemDetailViewController.m in Sources */,
 				4E7EF4DD19A77BFA00ABAECD /* MBProgressHUD.m in Sources */,

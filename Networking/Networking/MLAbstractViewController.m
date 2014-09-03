@@ -42,14 +42,14 @@
 }
 
 #pragma mark progress hud animation
--(void)endHud{
+-(void)removeLoadingHud{
     self.progressHud.mode = MBProgressHUDModeText;
 	self.progressHud.labelText = @"Listo!";
     //[HUD hide:YES afterDelay:0.3];
     [self.progressHud hide:YES];
 }
--(void) loadingHud{
-    [self endHud];
+-(void) showLoadingHud{
+    [self removeLoadingHud];
     
     self.progressHud = [[MBProgressHUD alloc] initWithView:self.view];
     self.progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

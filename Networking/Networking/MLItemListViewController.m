@@ -32,14 +32,22 @@
 
 @implementation MLItemListViewController
 
-- (id)initWithInput:(NSString*)input
-{
-    self = [super init];
-    if (self) {
-        self.input=input;
+-(instancetype) init{
+    
+    if (self = [super init]){
+        
         self.searchService = [[MLSearchService alloc]init];
         self.thumbnailService=[[MLThumbnailService
                                 alloc]init];
+    }
+    return self;
+}
+
+- (id)initWithInput:(NSString*)input
+{
+    self = [self init];
+    if (self) {
+        self.input=input;
     }
     return self;
 }
@@ -58,23 +66,28 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self setTitle:@"Resultados"];
-    [self loadingHud];
+    
+    [self showLoadingHud];
     [self.searchService startFetchingItemsWithInput:self.input andOffset:0];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ProductTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ProductCellIdentifier"];
+}
+-(void) viewWillDisappear:(BOOL)animated{
+#warning search searvice should be implemented so that it supports cancel method
+    //[self.searchService cancel];
 }
 
 #pragma mark - SearchManagerDelegate
 - (void)didReceiveItems:(NSArray *)items
 {
-    [self endHud];
+    [self removeLoadingHud];
     if (self.items == nil){
         self.items= [NSMutableArray arrayWithArray:items] ;
     }else{
         [self.items addObjectsFromArray:items];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //redraw UI in mainQueue
-        [self.tableView reloadData];
-    });
+    
+    [self.tableView reloadData];
+    
     
 }
 
@@ -84,53 +97,43 @@
 }
 
 -(void)didNotReceiveItems{
-    //should push a noResultsViewController
-    NSLog(@"0 resultados");
-    [self endHud];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        MLNoResultsViewController * noResultsView = [[MLNoResultsViewController alloc]initWithNibName:nil bundle:nil];
-        [self.view addSubview:noResultsView.view];
-    });
+    //Sets a noResultsView
+    [self removeLoadingHud];
+    
+    MLNoResultsViewController * noResultsView = [[MLNoResultsViewController alloc]initWithNibName:nil bundle:nil];
+    [self.view addSubview:noResultsView.view];
+
 }
 
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    
     return self.items.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     return kProductCellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    ProductTableViewCell * cell = (ProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProductTableViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    return cell;
+    ProductTableViewCell * productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellIdentifier"];
+    return productCell;
 }
 
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-  
     MLSearchItem *item = self.items[indexPath.row];
     [(ProductTableViewCell*)cell fillCellWithItem:item];
 }
 -(void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //Cancel
-    //no deberia haber tantos ifs el manager deberia encargarse de darme una imagen no me importa de donde
-    //debería tener
-
+    
     [(ProductTableViewCell *)cell cancelService];
 }
 
@@ -142,10 +145,10 @@
     {
         if(lastCell!= self.lastVisibleCell){
             self.lastVisibleCell=lastCell;
-                        UIActivityIndicatorView * spinner= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                        [spinner startAnimating];
-                        spinner.frame = CGRectMake(0, 0, 320, 44);
-                        self.tableView.tableFooterView =spinner;
+            UIActivityIndicatorView * spinner= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [spinner startAnimating];
+            spinner.frame = CGRectMake(0, 0, 320, 44);
+            self.tableView.tableFooterView =spinner;
             [self.searchService fetchNextPage];
         }
     }
@@ -155,7 +158,7 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MLSearchItem *item = self.items[indexPath.row];
-    MLItemDetailViewController * detailView= [[MLItemDetailViewController alloc] initWithNibName:nil bundle:nil andItem:item ];
+    MLItemDetailViewController * detailView= [[MLItemDetailViewController alloc] initWithItem:item ];
     [self.navigationController pushViewController:detailView animated:YES];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

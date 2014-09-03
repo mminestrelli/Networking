@@ -14,4 +14,6 @@
 - (void)downloadImageWithURL:(NSURL *)url usingQueue:(NSOperationQueue*)queue withCompletionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock;
 -(MLThumbnailService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification;
 -(void)cancel;
+
+-(MLThumbnailService*)downloadImageWithURL:(NSURL *)url image:(UIImage*) image andIdentification:(NSString*) identification;
 @end

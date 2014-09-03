@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MLImageCollectionViewCell : UICollectionViewCell
+
 -(void) setImage:(UIImage*) image;
 @end

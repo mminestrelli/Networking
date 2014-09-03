@@ -12,5 +12,7 @@
 -(void) loadImageWithData:(NSData*)data andIdentifier:(NSString*)identifier;
 -(void) noImageFound;
 @optional
+//-(void) loadImageWithData:(NSData*)data andIdentifier:(NSString*)identifier onImage:(UIImage*)image;
+//-(void) noImageFoundOnImage:(UIImage*)image;
 -(void) loadImage:(UIImage *) image;
 @end

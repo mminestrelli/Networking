@@ -12,5 +12,5 @@
 
 
 @interface MLItemDetailViewController : MLAbstractViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(MLSearchItem*)item;
+- (id)initWithItem:(MLSearchItem*)item;
 @end

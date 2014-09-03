@@ -51,9 +51,13 @@
         
     } else {
         if ([items count]==0) {
-            [self.delegate didNotReceiveItems];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self.delegate didNotReceiveItems];
+            });
         }else{
-            [self.delegate didReceiveItems:items];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self.delegate didReceiveItems:items];
+            });
         }
         
     }

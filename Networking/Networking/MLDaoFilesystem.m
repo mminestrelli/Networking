@@ -18,15 +18,25 @@
     return ([self getThumbnailWithId:identification andPath:path]==nil)? NO :YES;
 }
 -(void)saveThumbnail:(UIImage*)image withId:(NSString*)identification andPath:(NSString*)path{
-    [NSKeyedArchiver archiveRootObject:image toFile:path];
+    //writing to disk never in main thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSKeyedArchiver archiveRootObject:image toFile:path];
+        
+    });
 }
 
 -(NSMutableArray*) getHistoryFromPath:(NSString*)path{
+#warning read should be asynchronous
+    
     NSMutableArray* history=[NSKeyedUnarchiver unarchiveObjectWithFile:path];
     return history;
 }
 
 -(void)saveHistory:(NSMutableArray*) history inPath:(NSString*)path{
-    [NSKeyedArchiver archiveRootObject:history toFile:path];
+    //writing to disk never in main thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+         [NSKeyedArchiver archiveRootObject:history toFile:path];
+        
+    });
 }
 @end

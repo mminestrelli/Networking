@@ -12,6 +12,6 @@
 @interface MLAbstractViewController : UIViewController
 @property (nonatomic,strong) MBProgressHUD * progressHud;
 @property (nonatomic,strong) NSOperationQueue* thumbnailDownloadQueue;
--(void) loadingHud;
--(void) endHud;
+-(void) showLoadingHud;
+-(void) removeLoadingHud;
 @end

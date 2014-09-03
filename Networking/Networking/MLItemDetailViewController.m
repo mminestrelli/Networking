@@ -34,14 +34,18 @@
 
 @implementation MLItemDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andItem:(MLSearchItem*)item
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
+-(instancetype) init{
+    if([super init]){
         self.vipService= [[MLVipService alloc]init];
         self.imageService=[[MLThumbnailService alloc]init];
+    }
+    return self;
+}
+- (instancetype)initWithItem:(MLSearchItem*)item
+{
+    self = [self init];
+    if (self) {
+        // Custom initialization
         self.searchItem=item;
     }
     return self;
@@ -56,8 +60,16 @@
     self.vipService.delegate=self;
     //self.imageService.delegate=self;
     self.pageControlGallery.hidden = YES;
-    [self loadingHud];
+    [self showLoadingHud];
     [self.vipService startFetchingItemsWithInput:self.searchItem.identifier];
+    
+    
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+#warning vip service & image service must be implemented so that it supports cancelling
+    //[self.vipService cancel];
+    //[self.imageService cancel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,7 +133,7 @@
     self.labelPrice.text=[NSString stringWithFormat:@"%f",[item.price floatValue]];
     for (counter=0;counter<[self.searchItem.pictures count];counter++) {
         NSURL* url=[NSURL URLWithString:[self.searchItem.pictures objectAtIndex:counter]];
-        //[self.imageService downloadImageWithURL:url];
+        
         self.spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.spinner.center = CGPointMake(self.collectionViewPhotoGallery.frame.size.width/2,self.collectionViewPhotoGallery.frame.size.height/2);
         [self.collectionViewPhotoGallery addSubview:self.spinner];
@@ -151,42 +163,10 @@
     
 }
 
-#pragma mark Rotation handling methods
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:
-(NSTimeInterval)duration {
-    
-    // Fade the collectionView out
-    [self.collectionViewPhotoGallery setAlpha:0.0f];
-    
-    // Suppress the layout errors by invalidating the layout
-    [self.collectionViewPhotoGallery.collectionViewLayout invalidateLayout];
-    
-    // Calculate the index of the item that the collectionView is currently displaying
-    CGPoint currentOffset = [self.collectionViewPhotoGallery contentOffset];
-    self.currentIndex = currentOffset.x / self.collectionViewPhotoGallery.frame.size.width;
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    
-    // Force realignment of cell being displayed
-    CGSize currentSize = self.collectionViewPhotoGallery.bounds.size;
-    float offset = self.currentIndex * currentSize.width;
-    [self.collectionViewPhotoGallery setContentOffset:CGPointMake(offset, 0)];
-    
-    // Fade the collectionView back in
-    [UIView animateWithDuration:0.125f animations:^{
-        [self.collectionViewPhotoGallery setAlpha:1.0f];
-    }];
-    
-}
-
 #pragma mark - search manager delegates
 - (void)didReceiveItem:(MLSearchItem*)item{
-    [self endHud];
+    [self removeLoadingHud];
     [self loadImagesWithItem:item];
-    
-
 }
 
 -(void)didNotReceiveItem{
