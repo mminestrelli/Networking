@@ -25,6 +25,7 @@
 @property (nonatomic,strong) MLSearchService* searchService;
 @property (nonatomic,strong) MLImageService* thumbnailService;
 @property (nonatomic,strong) NSOperationQueue* thumbnailDownloadQueue;
+@property (nonatomic,strong) ProductTableViewCell* prototypeCell;
 
 @property (nonatomic,copy) NSString * myString;
 
@@ -43,7 +44,7 @@
     return self;
 }
 
-- (id)initWithInput:(NSString*)input
+- (instancetype)initWithInput:(NSString*)input
 {
     self = [self init];
     if (self) {
@@ -70,6 +71,7 @@
     [self showLoadingHud];
     [self.searchService startFetchingItemsWithInput:self.input andOffset:0];
     [self.tableView registerNib:[UINib nibWithNibName:@"ProductTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ProductCellIdentifier"];
+    self.prototypeCell=[self.tableView dequeueReusableCellWithIdentifier:@"ProductCellIdentifier"];
 }
 -(void) viewWillDisappear:(BOOL)animated{
 #warning search searvice should be implemented so that it supports cancel method
@@ -113,27 +115,41 @@
     return self.items.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+#warning y no hay una manera mas eficiente?
+    [self setCellContent:self.prototypeCell cellForRowAtIndexPath:indexPath];
+    return [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return kProductCellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProductTableViewCell * productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellIdentifier"];
+    [self setCellContent:productCell cellForRowAtIndexPath:indexPath];
     return productCell;
+}
+
+-(void) setCellContent:(ProductTableViewCell *) cell cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MLSearchItem *item = self.items[indexPath.row];
+    [cell.labeltitle setText:item.title];
+    [cell.labelPrice setText:[NSString stringWithFormat:@"$ %@", item.price ]];
+    
+    NSString* soldQty=[NSString stringWithFormat:@"%d%@",item.sold_quantity,@" vendidos." ];
+    [cell.labelSubtitle setText:soldQty];
 }
 
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     MLSearchItem *item = self.items[indexPath.row];
-    [(ProductTableViewCell*)cell fillCellWithItem:item];
+    [(ProductTableViewCell*)cell setThumbnailInCell:item];
 }
--(void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
+-(void) tableView:(UITableView *)tableView didEndDisplayingCell:(ProductTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     //Cancel
-    
+    ((ProductTableViewCell *)cell).imageViewPreview.image=nil;
     [(ProductTableViewCell *)cell cancelService];
 }
 

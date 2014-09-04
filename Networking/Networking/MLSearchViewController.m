@@ -17,6 +17,7 @@
 @interface MLSearchViewController ()
 //Search history
 @property (nonatomic,strong)NSMutableArray* history;
+@property (nonatomic,strong)MLHistoryTableViewCell* prototypeCell;
 @end
 
 @implementation MLSearchViewController
@@ -55,6 +56,7 @@
     self.searchBar.inputAccessoryView = toolBar;
     
     [self.tableViewHistory registerNib:[UINib nibWithNibName:@"MLHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SearchHistoryCellIdentifier"];
+    self.prototypeCell=[self.tableViewHistory dequeueReusableCellWithIdentifier:@"SearchHistoryCellIdentifier"];
     
     
     [self setTitle:@"Buscar"];
@@ -94,23 +96,9 @@
      }
      */
     
-    MLHistoryTableViewCell * historyCell = [tableView dequeueReusableCellWithIdentifier:@"SearchHistoryCellIdentifier"];
+   MLHistoryTableViewCell * historyCell = [tableView dequeueReusableCellWithIdentifier:@"SearchHistoryCellIdentifier"];
     
-    
-    MLHistoryItem * item=[self.history objectAtIndex:indexPath.row];
-    historyCell.labelHistoryItem.text=item.searchedItem;
-    
-    //FEO
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    if([item.searchDate isToday]){
-        [formatter setDateFormat:@"hh:mm"];
-    }
-    else{
-        [formatter setDateFormat:@"dd/MM/yyyy"];
-    }
-    
-    NSString *stringFromDate = [formatter stringFromDate:item.searchDate];
-    historyCell.labelDate.text=stringFromDate;
+    [self setCellContent:historyCell cellForRowAtIndexPath:indexPath];
     historyCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return historyCell;
     
@@ -126,10 +114,27 @@
     [self.tableViewHistory deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(void) setCellContent:(MLHistoryTableViewCell *) cell cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MLHistoryItem * item=[self.history objectAtIndex:indexPath.row];
+    cell.labelHistoryItem.text=item.searchedItem;
+    
+    //FEO
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    if([item.searchDate isToday]){
+        [formatter setDateFormat:@"hh:mm"];
+    }
+    else{
+        [formatter setDateFormat:@"dd/MM/yyyy"];
+    }
+    
+    NSString *stringFromDate = [formatter stringFromDate:item.searchDate];
+    cell.labelDate.text=stringFromDate;
+
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-#warning y si cambio el tamaño de la celda?
-    //return [self.cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
-    return kHistoryCellHeight;
+#warning y no hay una manera mas eficiente?
+    [self setCellContent:self.prototypeCell cellForRowAtIndexPath:indexPath];
+    return [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -157,7 +162,6 @@
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-    NSLog(@"mostro");
     self.tableViewHistory.scrollEnabled=YES;
         NSDictionary* info = [aNotification userInfo];
         CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
