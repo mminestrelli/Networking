@@ -51,7 +51,7 @@
 		4ED19F7C19A7AACC0056FD03 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ED19F7B19A7AACC0056FD03 /* ProductTableViewCell.xib */; };
 		4ED19F7F19A7AB960056FD03 /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */; };
 		4ED19F8219AB827B0056FD03 /* MLSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8119AB827B0056FD03 /* MLSearchService.m */; };
-		4ED19F8519AB82AD0056FD03 /* MLThumbnailService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8419AB82AD0056FD03 /* MLThumbnailService.m */; };
+		4ED19F8519AB82AD0056FD03 /* MLImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8419AB82AD0056FD03 /* MLImageService.m */; };
 		4ED19F8919AB86950056FD03 /* MLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8719AB86950056FD03 /* MLSearchViewController.m */; };
 		4ED19F8A19AB86950056FD03 /* MLSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ED19F8819AB86950056FD03 /* MLSearchViewController.xib */; };
 		4ED19F8D19AB87C60056FD03 /* MLAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8C19AB87C60056FD03 /* MLAbstractViewController.m */; };
@@ -143,8 +143,8 @@
 		4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductTableViewCell.m; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.m"; sourceTree = "<group>"; };
 		4ED19F8019AB827B0056FD03 /* MLSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSearchService.h; sourceTree = "<group>"; };
 		4ED19F8119AB827B0056FD03 /* MLSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSearchService.m; sourceTree = "<group>"; };
-		4ED19F8319AB82AD0056FD03 /* MLThumbnailService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLThumbnailService.h; sourceTree = "<group>"; };
-		4ED19F8419AB82AD0056FD03 /* MLThumbnailService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLThumbnailService.m; sourceTree = "<group>"; };
+		4ED19F8319AB82AD0056FD03 /* MLImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImageService.h; sourceTree = "<group>"; };
+		4ED19F8419AB82AD0056FD03 /* MLImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImageService.m; sourceTree = "<group>"; };
 		4ED19F8619AB86950056FD03 /* MLSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSearchViewController.h; sourceTree = "<group>"; };
 		4ED19F8719AB86950056FD03 /* MLSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSearchViewController.m; sourceTree = "<group>"; };
 		4ED19F8819AB86950056FD03 /* MLSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLSearchViewController.xib; sourceTree = "<group>"; };
@@ -334,8 +334,8 @@
 				4E77A71419AF847400405DB0 /* MLVipService.m */,
 				4ED19F8019AB827B0056FD03 /* MLSearchService.h */,
 				4ED19F8119AB827B0056FD03 /* MLSearchService.m */,
-				4ED19F8319AB82AD0056FD03 /* MLThumbnailService.h */,
-				4ED19F8419AB82AD0056FD03 /* MLThumbnailService.m */,
+				4ED19F8319AB82AD0056FD03 /* MLImageService.h */,
+				4ED19F8419AB82AD0056FD03 /* MLImageService.m */,
 				4E65CBD619ACDC720082999F /* MLDaoImageManager.h */,
 				4E65CBD719ACDC720082999F /* MLDaoImageManager.m */,
 				4E65CBD919ACDC850082999F /* MLDaoFilesystem.h */,
@@ -486,7 +486,7 @@
 				4ED19F7F19A7AB960056FD03 /* ProductTableViewCell.m in Sources */,
 				4E7EF4F419A7872F00ABAECD /* MLHistoryItem.m in Sources */,
 				4E7EF4D319A77B5B00ABAECD /* MLItemBuilder.m in Sources */,
-				4ED19F8519AB82AD0056FD03 /* MLThumbnailService.m in Sources */,
+				4ED19F8519AB82AD0056FD03 /* MLImageService.m in Sources */,
 				4E65CBD819ACDC720082999F /* MLDaoImageManager.m in Sources */,
 				4ED19F8219AB827B0056FD03 /* MLSearchService.m in Sources */,
 				4ED19F8D19AB87C60056FD03 /* MLAbstractViewController.m in Sources */,

@@ -11,7 +11,7 @@
 #import "MLSearchItem.h"
 #import "MLItemDetailViewController.h"
 #import "MLSearchService.h"
-#import "MLThumbnailService.h"
+#import "MLImageService.h"
 #import "MLDaoImageManager.h"
 #import "MLNoResultsViewController.h"
 #define kProductCellHeight 72
@@ -23,7 +23,7 @@
 @property (nonatomic,copy) NSString* input;
 @property (nonatomic,strong) ProductTableViewCell* lastVisibleCell;
 @property (nonatomic,strong) MLSearchService* searchService;
-@property (nonatomic,strong) MLThumbnailService* thumbnailService;
+@property (nonatomic,strong) MLImageService* thumbnailService;
 @property (nonatomic,strong) NSOperationQueue* thumbnailDownloadQueue;
 
 @property (nonatomic,copy) NSString * myString;
@@ -37,7 +37,7 @@
     if (self = [super init]){
         
         self.searchService = [[MLSearchService alloc]init];
-        self.thumbnailService=[[MLThumbnailService
+        self.thumbnailService=[[MLImageService
                                 alloc]init];
     }
     return self;

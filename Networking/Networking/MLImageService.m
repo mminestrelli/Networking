@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 mercadolibre. All rights reserved.
 //
 
-#import "MLThumbnailService.h"
+#import "MLImageService.h"
 #import "MLDaoImageManager.h"
 
-@interface MLThumbnailService()
+@interface MLImageService()
 @property (nonatomic,strong) NSURLConnection* connection;
 @property (nonatomic,copy) NSString* identification;
 
 // @property (nonatomic,strong) UIImage* currentImage;
 @end
 
-@implementation MLThumbnailService
+@implementation MLImageService
 
 - (void)downloadImageWithURL:(NSURL *)url usingQueue:(NSOperationQueue*) queue withCompletionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
 {
@@ -41,7 +41,7 @@
                            }];
 }
 
--(MLThumbnailService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification {
+-(MLImageService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification {
 
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     self.identification=identification;
@@ -49,7 +49,7 @@
     return self;
 }
 
--(MLThumbnailService*)downloadImageWithURL:(NSURL *)url image:(UIImage*) image andIdentification:(NSString*) identification {
+-(MLImageService*)downloadImageWithURL:(NSURL *)url image:(UIImage*) image andIdentification:(NSString*) identification {
 
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     self.identification=identification;

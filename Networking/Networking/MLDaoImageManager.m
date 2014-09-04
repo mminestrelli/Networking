@@ -9,7 +9,7 @@
 #import "MLDaoImageManager.h"
 #import "MLDaoFilesystem.h"
 #import "MLDaoMemory.h"
-#import "MLThumbnailService.h"
+#import "MLImageService.h"
 
 @interface MLDaoImageManager()
 
@@ -40,16 +40,16 @@
     return self;
 }
 
--(void)saveThumbnail:(UIImage*)image withId:(NSString*)identification{
-    [self.daoFileSystem saveThumbnail:image withId:identification andPath:[[self getCacheFilePath]stringByAppendingString:identification]];
+-(void)saveImage:(UIImage*)image withId:(NSString*)identification{
+    [self.daoFileSystem saveImage:image withId:identification andPath:[[self getCacheFilePath]stringByAppendingString:identification]];
 }
 
 -(BOOL)isImageCachedWithId:(NSString*) identification{
     return [self.daoFileSystem isImageCachedWithId:identification andPath:[[self getCacheFilePath]stringByAppendingString:identification]];
 }
 
--(UIImage*) getThumbnailWithId:(NSString*) identification{
-    return [self.daoFileSystem getThumbnailWithId:identification andPath:[[self getCacheFilePath]stringByAppendingString:identification]];
+-(UIImage*) getImageWithId:(NSString*) identification{
+    return [self.daoFileSystem getImageWithId:identification andPath:[[self getCacheFilePath]stringByAppendingString:identification]];
 }
 
 

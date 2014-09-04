@@ -10,14 +10,14 @@
 
 @implementation MLDaoFilesystem
 
--(UIImage*) getThumbnailWithId:(NSString*) identification andPath:(NSString*)path{
+-(UIImage*) getImageWithId:(NSString*) identification andPath:(NSString*)path{
     UIImage * thumbnail=[NSKeyedUnarchiver unarchiveObjectWithFile:path];
     return thumbnail;
 }
 -(BOOL)isImageCachedWithId:(NSString*) identification andPath:(NSString*)path{
-    return ([self getThumbnailWithId:identification andPath:path]==nil)? NO :YES;
+    return ([self getImageWithId:identification andPath:path]==nil)? NO :YES;
 }
--(void)saveThumbnail:(UIImage*)image withId:(NSString*)identification andPath:(NSString*)path{
+-(void)saveImage:(UIImage*)image withId:(NSString*)identification andPath:(NSString*)path{
     //writing to disk never in main thread
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [NSKeyedArchiver archiveRootObject:image toFile:path];

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface MLDaoFilesystem : NSObject
--(UIImage*) getThumbnailWithId:(NSString*) identification andPath:(NSString*)path;
+-(UIImage*) getImageWithId:(NSString*) identification andPath:(NSString*)path;
 -(BOOL)isImageCachedWithId:(NSString*) identification andPath:(NSString*)path;
--(void)saveThumbnail:(UIImage*)image withId:(NSString*)identification andPath:(NSString*)path;
+-(void)saveImage:(UIImage*)image withId:(NSString*)identification andPath:(NSString*)path;
 -(NSMutableArray*) getHistoryFromPath:(NSString*)path;
 -(void)saveHistory:(NSMutableArray*) history inPath:(NSString*)path;
 @end

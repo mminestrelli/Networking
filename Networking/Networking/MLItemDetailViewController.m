@@ -10,7 +10,7 @@
 #import "MLImageCollectionViewCell.h"
 #import "MLVipService.h"
 #import "MLSearchItem.h"
-#import "MLThumbnailService.h"
+#import "MLImageService.h"
 
 @interface MLItemDetailViewController ()<MLWebServiceDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewPhotoGallery;
 
 @property (nonatomic,strong) MLVipService * vipService;
-@property (nonatomic,strong) MLThumbnailService * imageService;
+@property (nonatomic,strong) MLImageService * imageService;
 //mock
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) NSArray *imagesFromService;
@@ -37,7 +37,7 @@
 -(instancetype) init{
     if([super init]){
         self.vipService= [[MLVipService alloc]init];
-        self.imageService=[[MLThumbnailService alloc]init];
+        self.imageService=[[MLImageService alloc]init];
     }
     return self;
 }

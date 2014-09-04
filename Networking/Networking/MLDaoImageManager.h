@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MLThumbnailService.h"
+#import "MLImageService.h"
 @interface MLDaoImageManager : NSObject
 + (id)sharedManager;
--(void)saveThumbnail:(UIImage*)image withId:(NSString*)identification;
+-(void)saveImage:(UIImage*)image withId:(NSString*)identification;
 -(BOOL)isImageCachedWithId:(NSString*) identification;
--(UIImage*) getThumbnailWithId:(NSString*) identification;
+-(UIImage*) getImageWithId:(NSString*) identification;
 
 
 //New dao implementation

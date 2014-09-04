@@ -36,6 +36,7 @@
     self.tableViewHistory.dataSource = self;
     self.tableViewHistory.scrollEnabled=YES;
     self.searchBar.delegate=self;
+    [self registerForKeyboardNotifications];
     
     // Particular de la search
     UIImage* logoImage = [UIImage imageNamed:@"mercadolibre.png"];
@@ -138,6 +139,42 @@
 /*Dismisses searchbar keyboard*/
 -(void)dismissKeyboard{
     [self.searchBar resignFirstResponder];
+}
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSLog(@"mostro");
+    self.tableViewHistory.scrollEnabled=YES;
+        NSDictionary* info = [aNotification userInfo];
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+#warning -55.0 deberia ser tableview.bottomspace to container
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height -55.0, 0.0);
+        self.tableViewHistory.contentInset = contentInsets;
+        self.tableViewHistory.scrollIndicatorInsets = contentInsets;
+}
+
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0,0.0, 0.0);;
+        self.tableViewHistory.contentInset = contentInsets;
+       self.tableViewHistory.scrollIndicatorInsets = contentInsets;
+    
 }
 #pragma mark searchbar
 /*Search bar button clicked pushes item list view controller, adds input from search to history*/
