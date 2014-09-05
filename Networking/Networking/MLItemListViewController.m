@@ -69,13 +69,27 @@
     [self setTitle:@"Resultados"];
     
     [self showLoadingHud];
-    [self.searchService startFetchingItemsWithInput:self.input andOffset:0];
+    //[self.searchService startFetchingItemsWithInput:self.input andOffset:0];
+    
+    [self.searchService startFetchingItemsWithInput:self.input andOffset:0 withCompletionBlock:^(NSArray * items) {
+            [self removeLoadingHud];
+            if (self.items == nil){
+                self.items= [NSMutableArray arrayWithArray:items] ;
+            }else{
+                [self.items addObjectsFromArray:items];
+            }
+            [self.tableView reloadData];
+        }
+        errorBlock:^(NSError *err) {
+            [self removeLoadingHud];
+            NSLog(@"Error %@; %@", err, [err localizedDescription]);
+        }];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ProductTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ProductCellIdentifier"];
     self.prototypeCell=[self.tableView dequeueReusableCellWithIdentifier:@"ProductCellIdentifier"];
 }
 -(void) viewWillDisappear:(BOOL)animated{
-#warning search searvice should be implemented so that it supports cancel method
-    //[self.searchService cancel];
+    [self.searchService cancel];
 }
 
 #pragma mark - SearchManagerDelegate

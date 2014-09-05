@@ -147,8 +147,12 @@
                 // change the image in the cell
                 // Update UI on the main thread.
                     [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+                        if (image==nil) {
+                            [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
+                        }else{
+                            [_images addObject:image];
+                        }
                         
-                        [_images addObject:image];
                         self.imagesFromService= _images;
                         if ([self.spinner isAnimating]) {
                             [self.spinner stopAnimating];

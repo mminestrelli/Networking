@@ -61,7 +61,6 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate loadImageWithData:data andIdentifier:self.identification];
-        
     });
 }
 
