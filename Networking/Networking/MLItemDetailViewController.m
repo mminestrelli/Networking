@@ -61,14 +61,29 @@
     //self.imageService.delegate=self;
     self.pageControlGallery.hidden = YES;
     [self showLoadingHud];
-    [self.vipService startFetchingItemsWithInput:self.searchItem.identifier];
+    //[self.vipService startFetchingItemsWithInput:self.searchItem.identifier];
+    
+    [self.vipService startFetchingItemsWithInput:self.searchItem.identifier
+        withCompletionBlock:^(NSArray * items) {
+            [self removeLoadingHud];
+            if([items count]==0) {
+                [self didNotReceiveItem];
+            }else{
+                MLSearchItem * searchItem=(MLSearchItem*) [items objectAtIndex:0];
+                [self didReceiveItem:searchItem];
+            }
+        }
+        errorBlock:^(NSError *err) {
+            [self removeLoadingHud];
+            NSLog(@"Error %@; %@", err, [err localizedDescription]);
+    }];
     
     
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
 #warning vip service & image service must be implemented so that it supports cancelling
-    //[self.vipService cancel];
+    [self.vipService cancel];
     //[self.imageService cancel];
 }
 

@@ -62,22 +62,24 @@
 {
     [super viewDidLoad];
     
-    self.searchService.delegate=self;
-    //thumbnaildelegate
+    //self.searchService.delegate=self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self setTitle:@"Resultados"];
     
     [self showLoadingHud];
-    //[self.searchService startFetchingItemsWithInput:self.input andOffset:0];
     
     [self.searchService startFetchingItemsWithInput:self.input andOffset:0 withCompletionBlock:^(NSArray * items) {
             [self removeLoadingHud];
             if (self.items == nil){
                 self.items= [NSMutableArray arrayWithArray:items] ;
-            }else{
-                [self.items addObjectsFromArray:items];
             }
+            if([items count]==0) {
+                [self didNotReceiveItems];
+            }else{
+                [self didReceiveItems:items];
+            }
+        
             [self.tableView reloadData];
         }
         errorBlock:^(NSError *err) {
@@ -95,16 +97,7 @@
 #pragma mark - SearchManagerDelegate
 - (void)didReceiveItems:(NSArray *)items
 {
-    [self removeLoadingHud];
-    if (self.items == nil){
-        self.items= [NSMutableArray arrayWithArray:items] ;
-    }else{
-        [self.items addObjectsFromArray:items];
-    }
-    
-    [self.tableView reloadData];
-    
-    
+    [self.items addObjectsFromArray:items];
 }
 
 - (void)fetchingItemsFailedWithError:(NSError *)error
@@ -114,8 +107,6 @@
 
 -(void)didNotReceiveItems{
     //Sets a noResultsView
-    [self removeLoadingHud];
-    
     MLNoResultsViewController * noResultsView = [[MLNoResultsViewController alloc]initWithNibName:nil bundle:nil];
     [self.view addSubview:noResultsView.view];
 

@@ -10,32 +10,73 @@
 
 @implementation MLVipService
 
-- (void)startFetchingItemsWithInput:(NSString*)input
-{
+//- (void)startFetchingItemsWithInput:(NSString*)input
+//{
+//    NSString *urlAsString = [NSString stringWithFormat:@"https://api.mercadolibre.com/items/%@",input ];
+//    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
+//    NSLog(@"%@", urlAsString);
+//    
+//    [super startFetchingItemsWithUrl:url];
+//}
+//
+//- (void)receivedItemsJSON:(NSData *)objectNotation
+//{
+//    NSError *error = nil;
+//    MLSearchItem *item = [self itemsFromJSON:objectNotation error:&error];
+//    
+//    if (error != nil) {
+//        [self.delegate fetchingItemsFailedWithError:error];
+//        
+//    } else {
+//        if (item==nil) {
+//            [self.delegate didNotReceiveItem];
+//        }else{
+//            [self.delegate didReceiveItem:item];
+//        }
+//        
+//    }
+//}
+
+
+- (void)startFetchingItemsWithInput:(NSString*)input withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error{
+    
+    self.successBlock=completionBlock;
+    self.errorBlock=error;
     NSString *urlAsString = [NSString stringWithFormat:@"https://api.mercadolibre.com/items/%@",input ];
     NSURL *url = [[NSURL alloc] initWithString:urlAsString];
-    NSLog(@"%@", urlAsString);
-    
-    [super startFetchingItemsWithUrl:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
 }
 
-- (void)receivedItemsJSON:(NSData *)objectNotation
+- (MLSearchItem*)receivedItemsFromJSON:(NSData *)objectNotation
 {
     NSError *error = nil;
     MLSearchItem *item = [self itemsFromJSON:objectNotation error:&error];
     
     if (error != nil) {
-        [self.delegate fetchingItemsFailedWithError:error];
-        
-    } else {
-        if (item==nil) {
-            [self.delegate didNotReceiveItem];
-        }else{
-            [self.delegate didReceiveItem:item];
-        }
-        
+        self.errorBlock(error);
+        return nil;
     }
+    return item;
 }
+#pragma mark - NSURLConnection delegate
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)someData {
+	[self.responseData appendData:someData];
+}
+
+-(void)connection:(NSURLConnection*) connection didReceiveResponse:(NSURLResponse *)response{
+    self.responseData = [[NSMutableData alloc] init];
+}
+-(void) connectionDidFinishLoading:(NSURLConnection *)aConnection {
+    NSArray* items=[NSArray arrayWithObject:[self receivedItemsFromJSON:self.responseData]];
+    self.successBlock(items);
+}
+
+-(void)connection:(NSURLConnection*) connection didFailWithError:(NSError *)error{
+    self.errorBlock(error);
+}
+
+#pragma mark item building
 
 - (MLSearchItem *)itemsFromJSON:(NSData *)objectNotation error:(NSError **)error
 {
@@ -65,5 +106,15 @@
     item.pictures=picturesUrls;
     return item;
 }
+#pragma mark - Connection cancelling
+
+-(void)cancel{
+    [self.connection cancel];
+}
+
+-(void) dealloc{
+    [self.connection cancel];
+}
+
 
 @end

@@ -8,6 +8,9 @@
 
 #import "MLWebService.h"
 #import "MLSearchItem.h"
+@interface MLWebService()
+
+@end
 
 @implementation MLWebService
 

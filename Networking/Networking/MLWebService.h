@@ -13,6 +13,10 @@
 @interface MLWebService : NSObject<MLSearchCommunicatorDelegate>
 
 @property (weak, nonatomic) id<MLWebServiceDelegate> delegate;
-
-- (void)startFetchingItemsWithUrl:(NSURL*)url;
+@property (nonatomic,strong) NSURLConnection* connection;
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (copy)void (^errorBlock)(NSError* err);
+@property (copy)void (^successBlock)(NSArray *items);
+//- (void)startFetchingItemsWithUrl:(NSURL*)url;
+-(void)cancel;
 @end

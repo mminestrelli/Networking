@@ -12,7 +12,7 @@
 @interface MLImageService()
 @property (nonatomic,strong) NSURLConnection* connection;
 @property (nonatomic,copy) NSString* identification;
-
+@property (nonatomic, strong) NSMutableData *responseData;
 // @property (nonatomic,strong) UIImage* currentImage;
 @end
 
@@ -41,6 +41,12 @@
                            }];
 }
 
+- (MLImageService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error{
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    self.identification=identification;
+    self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
+    return self;
+}
 -(MLImageService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification {
 
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -49,16 +55,25 @@
     return self;
 }
 
--(MLImageService*)downloadImageWithURL:(NSURL *)url image:(UIImage*) image andIdentification:(NSString*) identification {
-
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    self.identification=identification;
-    self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
-    return self;
-}
+//-(MLImageService*)downloadImageWithURL:(NSURL *)url image:(UIImage*) image andIdentification:(NSString*) identification {
+//
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    self.identification=identification;
+//    self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
+//    return self;
+//}
 
 #pragma mark - NSURLConnection delegate
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    [self.responseData appendData:data];
+}
+
+-(void)connection:(NSURLConnection*) connection didReceiveResponse:(NSURLResponse *)response{
+    self.responseData = [[NSMutableData alloc] init];
+}
+
+-(void) connectionDidFinishLoading:(NSURLConnection *)connection{
+    NSData * data = self.responseData;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate loadImageWithData:data andIdentifier:self.identification];
     });
