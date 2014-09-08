@@ -11,7 +11,7 @@
 @interface MLVipService : MLWebService<MLSearchCommunicatorDelegate>
 
 @property (weak, nonatomic) id<MLWebServiceDelegate> delegate;
-//- (void)startFetchingItemsWithInput:(NSString*)input;
+
 - (void)startFetchingItemsWithInput:(NSString*)input withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error;
 @end
 

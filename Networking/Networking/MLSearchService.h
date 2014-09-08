@@ -12,12 +12,10 @@
 
 @interface MLSearchService : NSObject
 
-//-(void) startFetchingItemsWithInput:(NSString*)input andOffset:(NSInteger)offset;
 -(void) fetchNextPage;
 /*Blocks for holding response*/
 @property (copy)void (^errorBlock)(NSError* err);
 @property (copy)void (^successBlock)(NSArray *items);
 - (void)startFetchingItemsWithInput:(NSString*)input andOffset:(NSInteger)offset withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error;
 -(void)cancel;
-//@property (weak, nonatomic) id<MLSearchManagerDelegate> delegate;
 @end

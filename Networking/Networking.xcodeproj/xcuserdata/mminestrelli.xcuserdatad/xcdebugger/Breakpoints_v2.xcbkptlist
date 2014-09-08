@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.m"
-            timestampString = "431884500.545894"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "-loadImage:withIdentifier:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Networking/MLItemDetailViewController.m"
-            timestampString = "431882366.501338"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "-didReceiveItem:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Networking/MLItemDetailViewController.m"
-            timestampString = "431878307.205799"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Networking/MLVipService.m"
-            timestampString = "431879722.070121"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
             landmarkName = "-startFetchingItemsWithInput:withCompletionBlock:errorBlock:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.m"
-            timestampString = "431884230.971334"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "-setThumbnailInCell:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.m"
-            timestampString = "431887305.417158"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "-loadImage:withIdentifier:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Networking/MLImageService.m"
-            timestampString = "431887759.884672"
+            timestampString = "431888519.072187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-downloadImageWithURL:andIdentification:withCompletionBlock:errorBlock:"
             landmarkType = "5">
          </BreakpointContent>
