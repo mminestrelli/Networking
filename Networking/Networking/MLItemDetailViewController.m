@@ -156,28 +156,44 @@
            [self.spinner startAnimating];
         });
         
-        [self.imageService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:
-            ^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                // change the image in the cell
-                // Update UI on the main thread.
-                    [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
-                        if (image==nil) {
-                            [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
-                        }else{
-                            [_images addObject:image];
-                        }
-                        
-                        self.imagesFromService= _images;
-                        if ([self.spinner isAnimating]) {
-                            [self.spinner stopAnimating];
-                        }
-                        [self.collectionViewPhotoGallery reloadData];
-                        
-                    }];
-                }
-            }];
+//        [self.imageService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:
+//            ^(BOOL succeeded, UIImage *image) {
+//                if (succeeded) {
+//                // change the image in the cell
+//                // Update UI on the main thread.
+//                    [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
+//                        if (image==nil) {
+//                            [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
+//                        }else{
+//                            [_images addObject:image];
+//                        }
+//                        
+//                        self.imagesFromService= _images;
+//                        if ([self.spinner isAnimating]) {
+//                            [self.spinner stopAnimating];
+//                        }
+//                        [self.collectionViewPhotoGallery reloadData];
+//                        
+//                    }];
+//                }
+//            }];
         
+        [self.imageService downloadImageWithURL:url andIdentification:self.searchItem.identifier withCompletionBlock:^(NSArray *items) {
+            UIImage * image= [UIImage imageWithData:(NSData*)[items objectAtIndex:0]];
+            if (image==nil) {
+                [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
+            }else{
+                [_images addObject:image];
+            }
+            
+            self.imagesFromService= _images;
+            if ([self.spinner isAnimating]) {
+                [self.spinner stopAnimating];
+            }
+            [self.collectionViewPhotoGallery reloadData];
+        } errorBlock:^(NSError *err) {
+            [self fetchingItemsFailedWithError:err];
+        }];
     }
     
 }

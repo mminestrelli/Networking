@@ -41,19 +41,21 @@
                            }];
 }
 
-- (MLImageService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error{
+- (void)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error{
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    self.successBlock=completionBlock;
+    self.errorBlock=error;
     self.identification=identification;
     self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
-    return self;
+    //return self;
 }
--(MLImageService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification {
-
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    self.identification=identification;
-    self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
-    return self;
-}
+//-(MLImageService*)downloadImageWithURL:(NSURL *)url andIdentification:(NSString*) identification {
+//
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    self.identification=identification;
+//    self.connection=[NSURLConnection connectionWithRequest:request delegate:self];
+//    return self;
+//}
 
 //-(MLImageService*)downloadImageWithURL:(NSURL *)url image:(UIImage*) image andIdentification:(NSString*) identification {
 //
@@ -73,12 +75,17 @@
 }
 
 -(void) connectionDidFinishLoading:(NSURLConnection *)connection{
-    NSData * data = self.responseData;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.delegate loadImageWithData:data andIdentifier:self.identification];
-    });
+    //NSData * data = self.responseData;
+    NSArray * dataInArray= [NSArray arrayWithObject:self.responseData];
+    self.successBlock(dataInArray);
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.delegate loadImageWithData:data andIdentifier:self.identification];
+//    });
 }
 
+-(void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    self.errorBlock(error);
+}
 
 -(void)cancel{
     [self.connection cancel];
