@@ -14,22 +14,8 @@
 
 @implementation MLWebService
 
-- (void)startFetchingItemsWithUrl:(NSURL*)url
-{
-    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        
-        if (error) {
-            [self fetchingItemsFailedWithError:error];
-        } else {
-            [self receivedItemsJSON:data];
-        }
-    }];
+
+-(void)cancel{
+    
 }
-
-
-- (void)fetchingItemsFailedWithError:(NSError *)error
-{
-    [self.delegate fetchingItemsFailedWithError:error];
-}
-
 @end

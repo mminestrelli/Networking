@@ -54,14 +54,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //[self loadImages];
+
     [self setupCollectionView];
     self.vipService.delegate=self;
-    //self.imageService.delegate=self;
     self.pageControlGallery.hidden = YES;
     [self showLoadingHud];
-    //[self.vipService startFetchingItemsWithInput:self.searchItem.identifier];
     
     [self.vipService startFetchingItemsWithInput:self.searchItem.identifier
         withCompletionBlock:^(NSArray * items) {
@@ -82,9 +79,8 @@
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
-#warning vip service & image service must be implemented so that it supports cancelling
     [self.vipService cancel];
-    //[self.imageService cancel];
+    [self.imageService cancel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,8 +93,6 @@
 
 - (IBAction)buyButtonPressed:(id)sender {
 }
-
-#pragma mark -
 #pragma mark UICollectionView methods
 
 -(void)setupCollectionView {
@@ -156,30 +150,9 @@
            [self.spinner startAnimating];
         });
         
-//        [self.imageService downloadImageWithURL:url usingQueue:self.thumbnailDownloadQueue withCompletionBlock:
-//            ^(BOOL succeeded, UIImage *image) {
-//                if (succeeded) {
-//                // change the image in the cell
-//                // Update UI on the main thread.
-//                    [[NSOperationQueue mainQueue] addOperationWithBlock: ^ {
-//                        if (image==nil) {
-//                            [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
-//                        }else{
-//                            [_images addObject:image];
-//                        }
-//                        
-//                        self.imagesFromService= _images;
-//                        if ([self.spinner isAnimating]) {
-//                            [self.spinner stopAnimating];
-//                        }
-//                        [self.collectionViewPhotoGallery reloadData];
-//                        
-//                    }];
-//                }
-//            }];
-        
-        [self.imageService downloadImageWithURL:url andIdentification:self.searchItem.identifier withCompletionBlock:^(NSArray *items) {
-            UIImage * image= [UIImage imageWithData:(NSData*)[items objectAtIndex:0]];
+        NSString * imgId=[NSString stringWithFormat: @"%@-%d",self.searchItem.identifier,counter];
+        [self.imageService downloadImageWithURL:url andIdentification:imgId withCompletionBlock:^(NSArray *items) {
+            UIImage * image= (UIImage*)[items objectAtIndex:0];
             if (image==nil) {
                 [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
             }else{

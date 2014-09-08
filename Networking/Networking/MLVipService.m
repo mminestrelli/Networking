@@ -10,34 +10,6 @@
 
 @implementation MLVipService
 
-//- (void)startFetchingItemsWithInput:(NSString*)input
-//{
-//    NSString *urlAsString = [NSString stringWithFormat:@"https://api.mercadolibre.com/items/%@",input ];
-//    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
-//    NSLog(@"%@", urlAsString);
-//    
-//    [super startFetchingItemsWithUrl:url];
-//}
-//
-//- (void)receivedItemsJSON:(NSData *)objectNotation
-//{
-//    NSError *error = nil;
-//    MLSearchItem *item = [self itemsFromJSON:objectNotation error:&error];
-//    
-//    if (error != nil) {
-//        [self.delegate fetchingItemsFailedWithError:error];
-//        
-//    } else {
-//        if (item==nil) {
-//            [self.delegate didNotReceiveItem];
-//        }else{
-//            [self.delegate didReceiveItem:item];
-//        }
-//        
-//    }
-//}
-
-
 - (void)startFetchingItemsWithInput:(NSString*)input withCompletionBlock:(void (^)(NSArray *items))completionBlock errorBlock:(void (^)(NSError* err)) error{
     
     self.successBlock=completionBlock;
