@@ -62,7 +62,6 @@
 {
     [super viewDidLoad];
     
-    //self.searchService.delegate=self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self setTitle:@"Resultados"];

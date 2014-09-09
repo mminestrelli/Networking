@@ -86,16 +86,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-     static NSString * tableIdentifier = @"MLHistoryTableViewCell";
-     MLHistoryTableViewCell * historyCell = (MLHistoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:tableIdentifier];
-     
-     if (historyCell == nil) {
-     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MLHistoryTableViewCell" owner:self options:nil];
-     historyCell = [nib objectAtIndex:0];
-     }
-     */
-    
    MLHistoryTableViewCell * historyCell = [tableView dequeueReusableCellWithIdentifier:@"SearchHistoryCellIdentifier"];
     
     [self setCellContent:historyCell cellForRowAtIndexPath:indexPath];

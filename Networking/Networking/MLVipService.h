@@ -8,7 +8,7 @@
 
 #import "MLWebService.h"
 
-@interface MLVipService : MLWebService<MLSearchCommunicatorDelegate>
+@interface MLVipService : MLWebService
 
 @property (weak, nonatomic) id<MLWebServiceDelegate> delegate;
 
