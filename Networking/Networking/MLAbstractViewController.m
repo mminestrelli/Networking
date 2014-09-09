@@ -45,7 +45,6 @@
 -(void)removeLoadingHud{
     self.progressHud.mode = MBProgressHUDModeText;
 	self.progressHud.labelText = @"Listo!";
-    //[HUD hide:YES afterDelay:0.3];
     [self.progressHud hide:YES];
 }
 -(void) showLoadingHud{

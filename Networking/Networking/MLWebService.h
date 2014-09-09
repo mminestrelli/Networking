@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SearchCommunicatorDelegate.h"
 #import "MLWebServiceDelegate.h"
 
 @interface MLWebService : NSObject

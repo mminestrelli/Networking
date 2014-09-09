@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SearchCommunicatorDelegate.h"
 #import "MLSearchManagerDelegate.h"
 
 @interface MLSearchService : NSObject

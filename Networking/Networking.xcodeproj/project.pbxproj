@@ -114,7 +114,6 @@
 		4E7EF4AE19A7719200ABAECD /* NetworkingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkingTests.m; sourceTree = "<group>"; };
 		4E7EF4BC19A77B5B00ABAECD /* MLSearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSearchItem.h; path = "../../../AlmacenDeProductos/Almacen de productos/MLSearchItem.h"; sourceTree = "<group>"; };
 		4E7EF4BD19A77B5B00ABAECD /* MLSearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLSearchItem.m; path = "../../../AlmacenDeProductos/Almacen de productos/MLSearchItem.m"; sourceTree = "<group>"; };
-		4E7EF4BE19A77B5B00ABAECD /* SearchCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchCommunicatorDelegate.h; path = "../../../AlmacenDeProductos/Almacen de productos/SearchCommunicatorDelegate.h"; sourceTree = "<group>"; };
 		4E7EF4C119A77B5B00ABAECD /* MLItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLItemBuilder.h; path = "../../../AlmacenDeProductos/Almacen de productos/MLItemBuilder.h"; sourceTree = "<group>"; };
 		4E7EF4C219A77B5B00ABAECD /* MLItemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLItemBuilder.m; path = "../../../AlmacenDeProductos/Almacen de productos/MLItemBuilder.m"; sourceTree = "<group>"; };
 		4E7EF4C319A77B5B00ABAECD /* MLSearchManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSearchManagerDelegate.h; path = "../../../AlmacenDeProductos/Almacen de productos/MLSearchManagerDelegate.h"; sourceTree = "<group>"; };
@@ -346,7 +345,6 @@
 				4E7EF4BD19A77B5B00ABAECD /* MLSearchItem.m */,
 				4E7EF4C119A77B5B00ABAECD /* MLItemBuilder.h */,
 				4E7EF4C219A77B5B00ABAECD /* MLItemBuilder.m */,
-				4E7EF4BE19A77B5B00ABAECD /* SearchCommunicatorDelegate.h */,
 				4E7EF4C319A77B5B00ABAECD /* MLSearchManagerDelegate.h */,
 				4E77A70B19AF6BA400405DB0 /* MLWebServiceDelegate.h */,
 				4E94B82119B0BE73000E0ABF /* MLThumbnailResponseDelegate.h */,

@@ -45,8 +45,6 @@
     }
 
 }
-
-
 #pragma mark - NSURLConnection delegate
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [self.responseData appendData:data];

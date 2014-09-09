@@ -16,7 +16,7 @@
 #import "MLNoResultsViewController.h"
 #define kProductCellHeight 72
 
-@interface MLItemListViewController ()<MLSearchManagerDelegate>
+@interface MLItemListViewController ()<MLSearchDelegate>
 
 @property (nonatomic,strong) NSMutableArray *items;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -114,8 +114,7 @@
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
+{    
     return self.items.count;
 }
 

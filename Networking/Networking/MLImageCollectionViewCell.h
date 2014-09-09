@@ -11,4 +11,5 @@
 @interface MLImageCollectionViewCell : UICollectionViewCell
 
 -(void) setImage:(UIImage*) image;
+-(void) loadImageWithUrl:(NSURL*) url andIdentification:(NSString*)imgId;
 @end

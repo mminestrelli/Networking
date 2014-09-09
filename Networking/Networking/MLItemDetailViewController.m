@@ -58,6 +58,7 @@
     [self setupCollectionView];
     self.vipService.delegate=self;
     self.pageControlGallery.hidden = YES;
+    
     [self showLoadingHud];
     
     [self.vipService startFetchingItemsWithInput:self.searchItem.identifier
@@ -112,16 +113,18 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.imagesFromService count];
+    return [self.searchItem.pictures count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     MLImageCollectionViewCell *cell = (MLImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     self.pageControlGallery.currentPage = indexPath.row;
-    self.pageControlGallery.numberOfPages=[self.imagesFromService count];
     self.pageControlGallery.hidden = NO;
-    [cell setImage:[self.imagesFromService objectAtIndex:indexPath.row]];
+    
+    NSURL* url=[NSURL URLWithString:[self.searchItem.pictures objectAtIndex:indexPath.row]];
+    NSString * imgId=[NSString stringWithFormat: @"%@-%d",self.searchItem.identifier,indexPath.row];
+    [cell loadImageWithUrl:url andIdentification:imgId];
     return cell;
     
 }
@@ -130,51 +133,28 @@
     return self.collectionViewPhotoGallery.frame.size;
 }
 
-#pragma mark -
+#pragma mark - aux
+-(void) setSpinnerCenteredInView:(UIView*) containerView{
+    self.spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.spinner.center = CGPointMake(containerView.frame.size.width/2,containerView.frame.size.height/2);
+    [containerView addSubview:self.spinner];
+    [self.spinner startAnimating];
+}
 #pragma mark Data methods
 
--(void)loadImagesWithItem:(MLSearchItem*)item {
+-(void)loadVipDescriptionWithItem:(MLSearchItem*)item {
     
-    NSMutableArray * _images=[[NSMutableArray alloc]init];
-    NSInteger counter=0;
     self.searchItem=item;
     self.labelTitle.text=item.title;
     self.labelPrice.text=[NSString stringWithFormat:@"%f",[item.price floatValue]];
-    for (counter=0;counter<[self.searchItem.pictures count];counter++) {
-        NSURL* url=[NSURL URLWithString:[self.searchItem.pictures objectAtIndex:counter]];
-        
-        self.spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.spinner.center = CGPointMake(self.collectionViewPhotoGallery.frame.size.width/2,self.collectionViewPhotoGallery.frame.size.height/2);
-        [self.collectionViewPhotoGallery addSubview:self.spinner];
-        dispatch_async(dispatch_get_main_queue(), ^{
-           [self.spinner startAnimating];
-        });
-        
-        NSString * imgId=[NSString stringWithFormat: @"%@-%d",self.searchItem.identifier,counter];
-        [self.imageService downloadImageWithURL:url andIdentification:imgId withCompletionBlock:^(NSArray *items) {
-            UIImage * image= (UIImage*)[items objectAtIndex:0];
-            if (image==nil) {
-                [_images addObject:[UIImage imageNamed:@"noPicl.png" ]];
-            }else{
-                [_images addObject:image];
-            }
-            
-            self.imagesFromService= _images;
-            if ([self.spinner isAnimating]) {
-                [self.spinner stopAnimating];
-            }
-            [self.collectionViewPhotoGallery reloadData];
-        } errorBlock:^(NSError *err) {
-            [self fetchingItemsFailedWithError:err];
-        }];
-    }
-    
+    [self.collectionViewPhotoGallery reloadData];
 }
 
 #pragma mark - search manager delegates
 - (void)didReceiveItem:(MLSearchItem*)item{
     [self removeLoadingHud];
-    [self loadImagesWithItem:item];
+    self.pageControlGallery.numberOfPages=[item.pictures count];
+    [self loadVipDescriptionWithItem:item];
 }
 
 -(void)didNotReceiveItem{
