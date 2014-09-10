@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MLImageCollectionViewCell : UICollectionViewCell
-
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewPhoto;
 -(void) setImage:(UIImage*) image;
 -(void) loadImageWithUrl:(NSURL*) url andIdentification:(NSString*)imgId;
+-(void) cancelService;
 @end

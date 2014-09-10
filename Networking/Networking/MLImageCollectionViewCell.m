@@ -10,7 +10,6 @@
 
 #import "MLImageService.h"
 @interface MLImageCollectionViewCell()
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewPhoto;
 //
 @property (strong, nonatomic) MLImageService* imageService;
 @property (nonatomic,strong) UIActivityIndicatorView* spinner;
@@ -69,5 +68,8 @@
     [self.spinner startAnimating];
 }
 
+-(void) cancelService{
+    [self.imageService cancel];
+}
 
 @end

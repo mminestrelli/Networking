@@ -133,6 +133,12 @@
     return self.collectionViewPhotoGallery.frame.size;
 }
 
+-(void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    //Cancel
+    ((MLImageCollectionViewCell *)cell).imageViewPhoto.image=nil;
+    [(MLImageCollectionViewCell *)cell cancelService];
+}
+
 #pragma mark - aux
 -(void) setSpinnerCenteredInView:(UIView*) containerView{
     self.spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
