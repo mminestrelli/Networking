@@ -23,10 +23,6 @@
 @property (nonatomic,strong) MLVipService * vipService;
 @property (nonatomic) int currentIndex;
 @property (nonatomic,strong) MLSearchItem* searchItem;
-
-
-
-
 @end
 
 @implementation MLItemDetailViewController
