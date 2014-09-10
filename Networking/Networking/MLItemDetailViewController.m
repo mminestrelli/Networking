@@ -21,12 +21,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewPhotoGallery;
 
 @property (nonatomic,strong) MLVipService * vipService;
-@property (nonatomic,strong) MLImageService * imageService;
-//mock
 @property (nonatomic) int currentIndex;
-@property (nonatomic, strong) NSArray *imagesFromService;
 @property (nonatomic,strong) MLSearchItem* searchItem;
-@property (nonatomic,strong) UIActivityIndicatorView* spinner;
+
 
 
 
@@ -37,7 +34,6 @@
 -(instancetype) init{
     if([super init]){
         self.vipService= [[MLVipService alloc]init];
-        self.imageService=[[MLImageService alloc]init];
     }
     return self;
 }
@@ -81,7 +77,6 @@
 
 -(void) viewWillDisappear:(BOOL)animated{
     [self.vipService cancel];
-    [self.imageService cancel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -139,13 +134,6 @@
     [(MLImageCollectionViewCell *)cell cancelService];
 }
 
-#pragma mark - aux
--(void) setSpinnerCenteredInView:(UIView*) containerView{
-    self.spinner=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.spinner.center = CGPointMake(containerView.frame.size.width/2,containerView.frame.size.height/2);
-    [containerView addSubview:self.spinner];
-    [self.spinner startAnimating];
-}
 #pragma mark Data methods
 
 -(void)loadVipDescriptionWithItem:(MLSearchItem*)item {
