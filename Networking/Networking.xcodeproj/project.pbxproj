@@ -31,7 +31,6 @@
 		4E7EF4E219A77D9200ABAECD /* MLFavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4E019A77D9200ABAECD /* MLFavouritesViewController.m */; };
 		4E7EF4E319A77D9200ABAECD /* MLFavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7EF4E119A77D9200ABAECD /* MLFavouritesViewController.xib */; };
 		4E7EF4F419A7872F00ABAECD /* MLHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4F319A7872F00ABAECD /* MLHistoryItem.m */; };
-		4E7EF4F719A7952100ABAECD /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4F619A7952100ABAECD /* NSDate+Utilities.m */; };
 		4E94B82419B5F8A8000E0ABF /* MLDaoHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */; };
 		4E94B82719B7C198000E0ABF /* MLKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82619B7C198000E0ABF /* MLKeyboardToolbar.m */; };
 		4E94B82D19C0D705000E0ABF /* MLItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82919C0D705000E0ABF /* MLItemBuilder.m */; };
@@ -50,6 +49,7 @@
 		4E94B84819C0DBBF000E0ABF /* bookmarksTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E94B84619C0DBBF000E0ABF /* bookmarksTabBar@2x.png */; };
 		4E94B84B19C0DBD7000E0ABF /* mercadolibre.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E94B84919C0DBD7000E0ABF /* mercadolibre.png */; };
 		4E94B84C19C0DBD7000E0ABF /* mercadolibre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E94B84A19C0DBD7000E0ABF /* mercadolibre@2x.png */; };
+		4E94B84F19C0DEB0000E0ABF /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B84E19C0DEB0000E0ABF /* NSDate+Utilities.m */; };
 		4ED19F8219AB827B0056FD03 /* MLSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8119AB827B0056FD03 /* MLSearchService.m */; };
 		4ED19F8519AB82AD0056FD03 /* MLImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8419AB82AD0056FD03 /* MLImageService.m */; };
 		4ED19F8919AB86950056FD03 /* MLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8719AB86950056FD03 /* MLSearchViewController.m */; };
@@ -112,8 +112,6 @@
 		4E7EF4E119A77D9200ABAECD /* MLFavouritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLFavouritesViewController.xib; sourceTree = "<group>"; };
 		4E7EF4F219A7872F00ABAECD /* MLHistoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLHistoryItem.h; sourceTree = "<group>"; };
 		4E7EF4F319A7872F00ABAECD /* MLHistoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLHistoryItem.m; sourceTree = "<group>"; };
-		4E7EF4F519A7952100ABAECD /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "../../../../Downloads/NSDate-Extensions-master/NSDate+Utilities.h"; sourceTree = "<group>"; };
-		4E7EF4F619A7952100ABAECD /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Utilities.m"; path = "../../../../Downloads/NSDate-Extensions-master/NSDate+Utilities.m"; sourceTree = "<group>"; };
 		4E94B82119B0BE73000E0ABF /* MLThumbnailResponseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLThumbnailResponseDelegate.h; sourceTree = "<group>"; };
 		4E94B82219B5F8A8000E0ABF /* MLDaoHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLDaoHistoryManager.h; sourceTree = "<group>"; };
 		4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDaoHistoryManager.m; sourceTree = "<group>"; };
@@ -140,6 +138,8 @@
 		4E94B84619C0DBBF000E0ABF /* bookmarksTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookmarksTabBar@2x.png"; sourceTree = "<group>"; };
 		4E94B84919C0DBD7000E0ABF /* mercadolibre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mercadolibre.png; sourceTree = "<group>"; };
 		4E94B84A19C0DBD7000E0ABF /* mercadolibre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mercadolibre@2x.png"; sourceTree = "<group>"; };
+		4E94B84D19C0DEB0000E0ABF /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		4E94B84E19C0DEB0000E0ABF /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		4ED19F8019AB827B0056FD03 /* MLSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSearchService.h; sourceTree = "<group>"; };
 		4ED19F8119AB827B0056FD03 /* MLSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSearchService.m; sourceTree = "<group>"; };
 		4ED19F8319AB82AD0056FD03 /* MLImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImageService.h; sourceTree = "<group>"; };
@@ -239,8 +239,8 @@
 				4E94B83119C0D787000E0ABF /* ProductTableViewCell.xib */,
 				4E94B83419C0D93B000E0ABF /* MBProgressHUD.h */,
 				4E94B83519C0D93B000E0ABF /* MBProgressHUD.m */,
-				4E7EF4F519A7952100ABAECD /* NSDate+Utilities.h */,
-				4E7EF4F619A7952100ABAECD /* NSDate+Utilities.m */,
+				4E94B84D19C0DEB0000E0ABF /* NSDate+Utilities.h */,
+				4E94B84E19C0DEB0000E0ABF /* NSDate+Utilities.m */,
 				4E7EF49119A7719200ABAECD /* Networking-Info.plist */,
 				4E7EF49219A7719200ABAECD /* InfoPlist.strings */,
 				4E7EF49519A7719200ABAECD /* main.m */,
@@ -476,6 +476,7 @@
 				4E94B82719B7C198000E0ABF /* MLKeyboardToolbar.m in Sources */,
 				4E94B83219C0D787000E0ABF /* ProductTableViewCell.m in Sources */,
 				4ED19F9119AB891C0056FD03 /* MLHistoryTableViewCell.m in Sources */,
+				4E94B84F19C0DEB0000E0ABF /* NSDate+Utilities.m in Sources */,
 				4ED19F9619AB8C980056FD03 /* MLItemDetailViewController.m in Sources */,
 				4E94B83619C0D93B000E0ABF /* MBProgressHUD.m in Sources */,
 				4ED19F9B19AB8E1C0056FD03 /* MLItemListViewController.m in Sources */,
@@ -491,7 +492,6 @@
 				4E94B82419B5F8A8000E0ABF /* MLDaoHistoryManager.m in Sources */,
 				4E7EF4E219A77D9200ABAECD /* MLFavouritesViewController.m in Sources */,
 				4E77A71519AF847400405DB0 /* MLVipService.m in Sources */,
-				4E7EF4F719A7952100ABAECD /* NSDate+Utilities.m in Sources */,
 				4E65CBF919AE88C50082999F /* MLWebService.m in Sources */,
 				4E77A71119AF74C200405DB0 /* MLNoResultsViewController.m in Sources */,
 			);
