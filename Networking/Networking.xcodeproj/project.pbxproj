@@ -33,8 +33,6 @@
 		4E7EF4A519A7719200ABAECD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7EF48D19A7719200ABAECD /* UIKit.framework */; };
 		4E7EF4AD19A7719200ABAECD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E7EF4AB19A7719200ABAECD /* InfoPlist.strings */; };
 		4E7EF4AF19A7719200ABAECD /* NetworkingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4AE19A7719200ABAECD /* NetworkingTests.m */; };
-		4E7EF4D119A77B5B00ABAECD /* MLSearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4BD19A77B5B00ABAECD /* MLSearchItem.m */; };
-		4E7EF4D319A77B5B00ABAECD /* MLItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4C219A77B5B00ABAECD /* MLItemBuilder.m */; };
 		4E7EF4DD19A77BFA00ABAECD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4DC19A77BFA00ABAECD /* MBProgressHUD.m */; };
 		4E7EF4E219A77D9200ABAECD /* MLFavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4E019A77D9200ABAECD /* MLFavouritesViewController.m */; };
 		4E7EF4E319A77D9200ABAECD /* MLFavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7EF4E119A77D9200ABAECD /* MLFavouritesViewController.xib */; };
@@ -48,8 +46,10 @@
 		4E7EF4F719A7952100ABAECD /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF4F619A7952100ABAECD /* NSDate+Utilities.m */; };
 		4E94B82419B5F8A8000E0ABF /* MLDaoHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */; };
 		4E94B82719B7C198000E0ABF /* MLKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82619B7C198000E0ABF /* MLKeyboardToolbar.m */; };
-		4ED19F7C19A7AACC0056FD03 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ED19F7B19A7AACC0056FD03 /* ProductTableViewCell.xib */; };
-		4ED19F7F19A7AB960056FD03 /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */; };
+		4E94B82D19C0D705000E0ABF /* MLItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82919C0D705000E0ABF /* MLItemBuilder.m */; };
+		4E94B82E19C0D705000E0ABF /* MLSearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B82B19C0D705000E0ABF /* MLSearchItem.m */; };
+		4E94B83219C0D787000E0ABF /* ProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94B83019C0D787000E0ABF /* ProductTableViewCell.m */; };
+		4E94B83319C0D787000E0ABF /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E94B83119C0D787000E0ABF /* ProductTableViewCell.xib */; };
 		4ED19F8219AB827B0056FD03 /* MLSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8119AB827B0056FD03 /* MLSearchService.m */; };
 		4ED19F8519AB82AD0056FD03 /* MLImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8419AB82AD0056FD03 /* MLImageService.m */; };
 		4ED19F8919AB86950056FD03 /* MLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED19F8719AB86950056FD03 /* MLSearchViewController.m */; };
@@ -112,11 +112,6 @@
 		4E7EF4AA19A7719200ABAECD /* NetworkingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NetworkingTests-Info.plist"; sourceTree = "<group>"; };
 		4E7EF4AC19A7719200ABAECD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4E7EF4AE19A7719200ABAECD /* NetworkingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkingTests.m; sourceTree = "<group>"; };
-		4E7EF4BC19A77B5B00ABAECD /* MLSearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSearchItem.h; path = "../../../AlmacenDeProductos/Almacen de productos/MLSearchItem.h"; sourceTree = "<group>"; };
-		4E7EF4BD19A77B5B00ABAECD /* MLSearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLSearchItem.m; path = "../../../AlmacenDeProductos/Almacen de productos/MLSearchItem.m"; sourceTree = "<group>"; };
-		4E7EF4C119A77B5B00ABAECD /* MLItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLItemBuilder.h; path = "../../../AlmacenDeProductos/Almacen de productos/MLItemBuilder.h"; sourceTree = "<group>"; };
-		4E7EF4C219A77B5B00ABAECD /* MLItemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLItemBuilder.m; path = "../../../AlmacenDeProductos/Almacen de productos/MLItemBuilder.m"; sourceTree = "<group>"; };
-		4E7EF4C319A77B5B00ABAECD /* MLSearchManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLSearchManagerDelegate.h; path = "../../../AlmacenDeProductos/Almacen de productos/MLSearchManagerDelegate.h"; sourceTree = "<group>"; };
 		4E7EF4DB19A77BFA00ABAECD /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = "../../../AlmacenDeProductos/Almacen de productos/MBProgressHUD.h"; sourceTree = "<group>"; };
 		4E7EF4DC19A77BFA00ABAECD /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = "../../../AlmacenDeProductos/Almacen de productos/MBProgressHUD.m"; sourceTree = "<group>"; };
 		4E7EF4DF19A77D9200ABAECD /* MLFavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFavouritesViewController.h; sourceTree = "<group>"; };
@@ -137,9 +132,14 @@
 		4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDaoHistoryManager.m; sourceTree = "<group>"; };
 		4E94B82519B7C198000E0ABF /* MLKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKeyboardToolbar.h; sourceTree = "<group>"; };
 		4E94B82619B7C198000E0ABF /* MLKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKeyboardToolbar.m; sourceTree = "<group>"; };
-		4ED19F7B19A7AACC0056FD03 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductTableViewCell.xib; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.xib"; sourceTree = "<group>"; };
-		4ED19F7D19A7AB960056FD03 /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductTableViewCell.h; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.h"; sourceTree = "<group>"; };
-		4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductTableViewCell.m; path = "../../../AlmacenDeProductos/Almacen de productos/ProductTableViewCell.m"; sourceTree = "<group>"; };
+		4E94B82819C0D705000E0ABF /* MLItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLItemBuilder.h; sourceTree = "<group>"; };
+		4E94B82919C0D705000E0ABF /* MLItemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLItemBuilder.m; sourceTree = "<group>"; };
+		4E94B82A19C0D705000E0ABF /* MLSearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSearchItem.h; sourceTree = "<group>"; };
+		4E94B82B19C0D705000E0ABF /* MLSearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSearchItem.m; sourceTree = "<group>"; };
+		4E94B82C19C0D705000E0ABF /* MLSearchManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSearchManagerDelegate.h; sourceTree = "<group>"; };
+		4E94B82F19C0D787000E0ABF /* ProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableViewCell.h; sourceTree = "<group>"; };
+		4E94B83019C0D787000E0ABF /* ProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableViewCell.m; sourceTree = "<group>"; };
+		4E94B83119C0D787000E0ABF /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		4ED19F8019AB827B0056FD03 /* MLSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSearchService.h; sourceTree = "<group>"; };
 		4ED19F8119AB827B0056FD03 /* MLSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSearchService.m; sourceTree = "<group>"; };
 		4ED19F8319AB82AD0056FD03 /* MLImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImageService.h; sourceTree = "<group>"; };
@@ -234,9 +234,9 @@
 		4E7EF49019A7719200ABAECD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4ED19F7D19A7AB960056FD03 /* ProductTableViewCell.h */,
-				4ED19F7E19A7AB960056FD03 /* ProductTableViewCell.m */,
-				4ED19F7B19A7AACC0056FD03 /* ProductTableViewCell.xib */,
+				4E94B82F19C0D787000E0ABF /* ProductTableViewCell.h */,
+				4E94B83019C0D787000E0ABF /* ProductTableViewCell.m */,
+				4E94B83119C0D787000E0ABF /* ProductTableViewCell.xib */,
 				4E7EF4DB19A77BFA00ABAECD /* MBProgressHUD.h */,
 				4E7EF4DC19A77BFA00ABAECD /* MBProgressHUD.m */,
 				4E7EF4F519A7952100ABAECD /* NSDate+Utilities.h */,
@@ -341,15 +341,15 @@
 				4E65CBDA19ACDC850082999F /* MLDaoFilesystem.m */,
 				4E65CBDC19ACDC920082999F /* MLDaoMemory.h */,
 				4E65CBDD19ACDC920082999F /* MLDaoMemory.m */,
-				4E7EF4BC19A77B5B00ABAECD /* MLSearchItem.h */,
-				4E7EF4BD19A77B5B00ABAECD /* MLSearchItem.m */,
-				4E7EF4C119A77B5B00ABAECD /* MLItemBuilder.h */,
-				4E7EF4C219A77B5B00ABAECD /* MLItemBuilder.m */,
-				4E7EF4C319A77B5B00ABAECD /* MLSearchManagerDelegate.h */,
 				4E77A70B19AF6BA400405DB0 /* MLWebServiceDelegate.h */,
 				4E94B82119B0BE73000E0ABF /* MLThumbnailResponseDelegate.h */,
 				4E94B82219B5F8A8000E0ABF /* MLDaoHistoryManager.h */,
 				4E94B82319B5F8A8000E0ABF /* MLDaoHistoryManager.m */,
+				4E94B82819C0D705000E0ABF /* MLItemBuilder.h */,
+				4E94B82919C0D705000E0ABF /* MLItemBuilder.m */,
+				4E94B82A19C0D705000E0ABF /* MLSearchItem.h */,
+				4E94B82B19C0D705000E0ABF /* MLSearchItem.m */,
+				4E94B82C19C0D705000E0ABF /* MLSearchManagerDelegate.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -436,11 +436,11 @@
 				4E65CBD119ACD0100082999F /* noPicI.png in Resources */,
 				4ED19F8A19AB86950056FD03 /* MLSearchViewController.xib in Resources */,
 				4E7EF49419A7719200ABAECD /* InfoPlist.strings in Resources */,
-				4ED19F7C19A7AACC0056FD03 /* ProductTableViewCell.xib in Resources */,
 				4E7EF4F019A785D900ABAECD /* mercadolibre@2x.png in Resources */,
 				4ED19F9219AB891C0056FD03 /* MLHistoryTableViewCell.xib in Resources */,
 				4E65CBD519ACD0100082999F /* noPicP@2x.png in Resources */,
 				4E7EF4E819A7833800ABAECD /* searchTabBar@2x.png in Resources */,
+				4E94B83319C0D787000E0ABF /* ProductTableViewCell.xib in Resources */,
 				4E65CBD319ACD0100082999F /* noPicItemList_ar.gif in Resources */,
 				4E7EF49C19A7719200ABAECD /* Images.xcassets in Resources */,
 				4E65CBEE19AE67D80082999F /* MLImageCollectionViewCell.xib in Resources */,
@@ -469,11 +469,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E7EF4D119A77B5B00ABAECD /* MLSearchItem.m in Sources */,
 				4ED19F8919AB86950056FD03 /* MLSearchViewController.m in Sources */,
+				4E94B82E19C0D705000E0ABF /* MLSearchItem.m in Sources */,
 				4E7EF49619A7719200ABAECD /* main.m in Sources */,
 				4E65CBDE19ACDC920082999F /* MLDaoMemory.m in Sources */,
 				4E94B82719B7C198000E0ABF /* MLKeyboardToolbar.m in Sources */,
+				4E94B83219C0D787000E0ABF /* ProductTableViewCell.m in Sources */,
 				4ED19F9119AB891C0056FD03 /* MLHistoryTableViewCell.m in Sources */,
 				4ED19F9619AB8C980056FD03 /* MLItemDetailViewController.m in Sources */,
 				4E7EF4DD19A77BFA00ABAECD /* MBProgressHUD.m in Sources */,
@@ -481,9 +482,8 @@
 				4E7EF49A19A7719200ABAECD /* MLAppDelegate.m in Sources */,
 				4E65CBEA19AE67870082999F /* MLImageCollectionViewCell.m in Sources */,
 				4E65CBDB19ACDC850082999F /* MLDaoFilesystem.m in Sources */,
-				4ED19F7F19A7AB960056FD03 /* ProductTableViewCell.m in Sources */,
+				4E94B82D19C0D705000E0ABF /* MLItemBuilder.m in Sources */,
 				4E7EF4F419A7872F00ABAECD /* MLHistoryItem.m in Sources */,
-				4E7EF4D319A77B5B00ABAECD /* MLItemBuilder.m in Sources */,
 				4ED19F8519AB82AD0056FD03 /* MLImageService.m in Sources */,
 				4E65CBD819ACDC720082999F /* MLDaoImageManager.m in Sources */,
 				4ED19F8219AB827B0056FD03 /* MLSearchService.m in Sources */,
